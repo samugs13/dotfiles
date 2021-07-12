@@ -1,0 +1,54 @@
+background_opacity: 0.9
+
+window:
+    decorations: full
+    title: Terminal
+    startup_mode: Maximized
+    dynamic_title: true
+    padding:
+        x: 5
+        y: 5
+
+font:
+    normal:
+        family: Hack
+        style: Regular
+    bold:
+        family: Hack
+        style: Bold
+    italic:
+        family: Hack
+        style: Italic
+    bold_italic:
+        family: Hack
+        style: Bold Italic
+    size: 11.0
+
+colors:
+    primary:
+        background: '#1b1b1b'
+        foreground: '#ffffff'
+    cursor:
+         text: '#1b1b1b'
+         cursor: '#ffffff'
+    selection:
+         background: '#5b5b5b'
+         foreground: '#ffffff'
+    normal:
+         black:   '#3d3d3d'
+         red:     '#6673bf'
+         green:   '#3ea290'
+         yellow:  '#b0ead9'
+         blue:    '#31658c'
+         magenta: '#596196'
+         cyan:    '#8292b2'
+         white:   '#c8cacc'
+    bright:
+         black:   '#6d6d6d'
+         red:     '#899aff'
+         green:   '#52ad91'
+         yellow:  '#98c9bb'
+         blue:    '#477ab3'
+         magenta: '#7882bf'
+         cyan:    '#95a7cc'
+         white:   '#edeff2'
