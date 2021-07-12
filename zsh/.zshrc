@@ -31,10 +31,9 @@ lfcd () {
 bindkey -s '^f' 'lfcd\n'
 
 # my aliases 
- alias az="cp $HOME/.zshrc $HOME/Escritorio/dotfiles/"
- alias aa="cp $HOME/.config/alacritty/alacritty.yml $HOME/Escritorio/dotfiles/.config/alacritty/"
- alias aq="cp $HOME/.config/qtile/config.py $HOME/Escritorio/dotfiles/.config/qtile/ && cp -r $HOME/.config/qtile/wallpapers $HOME/Escritorio/dotfiles/.config/qtile/ && cp $HOME/.config/qtile/autostart.sh $HOME/Escritorio/dotfiles/.config/qtile/"
-# alias al = "cp $HOME/etc/lightdm/lightdm.conf $HOME/Escritorio/dotfiles/.config/lightdm/ && cp $HOME/etc/lightdm/lightdm-mini-greeter.conf $HOME/Escritorio/dotfiles/.config/lightdm/"
+ alias az="cp $HOME/.zshrc $HOME/Escritorio/dotfiles/zsh/"
+ alias aa="cp $HOME/.config/alacritty/alacritty.yml $HOME/Escritorio/dotfiles/alacritty/"
+ alias aq="cp $HOME/.config/qtile/config.py $HOME/Escritorio/dotfiles/qtile/ && cp -r $HOME/.config/qtile/wallpapers $HOME/Escritorio/dotfiles/qtile/ && cp $HOME/.config/qtile/autostart.sh $HOME/Escritorio/dotfiles/qtile/"
 
 # Load plugins
 source /home/s4mb4/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
