@@ -506,11 +506,9 @@ def autostart():
 
 # Alternative autostart:
 #cmd = [
-#     "setxkbmap es",
-#     "feh --bg-fill /home/s4mb4/.config/qtile/wallpapers/fsociety.png",
-#     "compton &",
+#     "INSERT_AUTOSTART_COMMANDS",
 #]
-# 
+ 
 #for x in cmd:
 #    os.system(x)
 
