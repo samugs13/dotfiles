@@ -13,8 +13,6 @@ import re
 import socket
 import subprocess
 
-import arcobattery
-
 mod = "mod4"
 terminal ="alacritty"
 
@@ -322,7 +320,8 @@ def init_widget_list():
                 widget.ThermalSensor(
                     background = azul,
                     foreground = blanco,
-                    padding = 0
+                    padding = 0,
+                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' --hold -e sensors')},
                 ),
 
                 widget.Sep(
@@ -389,13 +388,7 @@ def init_widget_list():
                 #    low_foreground = rojo,
                 #    low_percentage = 0.2,
                 #    update_interval = 1,
-                #), 
-
-               # widget.Sep(
-               #     linewidth = 0,
-               #     padding = 15,
-               #     background = azul
-               # ),
+                #),
 
                 widget.TextBox(
                    text = "| ",
