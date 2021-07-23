@@ -246,7 +246,7 @@ def init_widget_list():
                     font = "Hack",
                     fontsize = 13,
                     max_chars = 100,
-                    padding = 10,
+                    padding = 5,
                 ),
 
                 widget.TextBox(
@@ -263,17 +263,27 @@ def init_widget_list():
                     background = negro
                 ),
 
-                widget.Notify(
+               # widget.Notify(
+               #     padding = 4,
+               #     background = negro,
+               #     foreground = blanco,
+               #     foreground_low = amarillo2,
+               #     foreground_urgent = rojo,
+               #     default_timeout = 15,
+               # ),
+               
+                widget.Mpris2(
+                    name='spotify',
+                    objname="org.mpris.MediaPlayer2.spotify",
+                    display_metadata=['xesam:title', 'xesam:artist'],
+                    scroll_chars=None,
+                    stop_pause_text='',
+                    markup = True,
+                    foreground = amarillo2,
                     padding = 4,
-                    background = negro,
-                    foreground = blanco,
-                    foreground_low = amarillo2,
-                    foreground_urgent = rojo,
-                    default_timeout = 15,
-
+                    fmt = '🎶 {}',
+                    fontsize = 13
                 ),
-
-                widget.Cmus(),
 
                 widget.Sep(
                     linewidth = 0,
@@ -338,7 +348,7 @@ def init_widget_list():
                 ),
 
                 widget.CheckUpdates(
-                    update_interval=60, 
+                    update_interval=20, 
                     foreground = blanco,
                     colour_have_updates = blanco,
                     background = azul,
@@ -373,22 +383,6 @@ def init_widget_list():
                     padding = 4,
                     background = azul
                 ),
-
-                #widget.Battery(
-                #    charge_char='ᐱ',
-                #    discharge_char='ᐯ',
-                #    full_char='⇋',
-                #    low_percentaje = 0.15,
-                #    background = azul,
-                #    foreground = blanco,
-                #    format = '{percent:2.0%} {char}',
-                #    notify_below = 0.2,
-                #    padding = 0,
-                #    show_short_text = True,
-                #    low_foreground = rojo,
-                #    low_percentage = 0.2,
-                #    update_interval = 1,
-                #),
 
                 widget.TextBox(
                    text = "| ",
@@ -461,7 +455,7 @@ def init_widget_list():
 ################################
 
 def init_screens():
-    return [Screen(top=bar.Bar(init_widget_list(), size=20, background = negro))]
+    return [Screen (top=bar.Bar(init_widget_list(), size=20, background = negro))]
 
 screens = init_screens()
 
@@ -506,9 +500,9 @@ def autostart():
 
 # Alternative autostart:
 #cmd = [
-#     "INSERT_AUTOSTART_COMMANDS",
+#     "commands",
 #]
- 
+# 
 #for x in cmd:
 #    os.system(x)
 
