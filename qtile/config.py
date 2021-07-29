@@ -25,10 +25,11 @@ blanco = "#ffffff"
 gris = "#636A78"
 amarillo = "#b0ead9"
 azul = "#31658c"
-verde = "#A3BE8C"
+verde = "#037a77"
 rojo = "#BF616A"
 beige = "#8292b2"
 amarillo2 = "#EBCB8B"
+amarillo3 = "#ffbf00"
 
 ################################################################################################################
 #                                                   KEYS                                                       #
@@ -117,24 +118,13 @@ keys = [
 # Apps
     
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    Key([mod], "r", lazy.run_extension(extension.DmenuRun(
-        
-        dmenu_prompt="DMENU",
-        dmenu_font="Monospace-11",
-        background = negro,
-        selected_background=amarillo2,
-        foreground="#ffffff",
-        selected_foreground=negro,
-
-    ))),
+    Key([mod], "r", lazy.run_extension(extension.DmenuRun())),
 
     Key([mod], "b", lazy.spawn("brave --new-window")),
     Key([mod], "d", lazy.spawn("dolphin")),
-    Key([mod], "o", lazy.spawn("obs")),
     Key([mod], "s", lazy.spawn("spotify")),
-    Key([mod], "t", lazy.spawn("teams")),  
-    Key([mod], "y", lazy.spawn("skypeforlinux")),
     Key([mod], "w", lazy.spawn("brave --new-window https://web.whatsapp.com/")),
+    Key([mod], "x", lazy.spawn("slock")),
 ]
 
 
@@ -180,12 +170,30 @@ for i in groups:
     
 layouts = [
     layout.MonadTall(
-        border_width=3,
-        border_focus = amarillo,
-        border_normal = beige, 
+        border_width=2,
+        border_focus = amarillo3,
+        border_normal = gris, 
         single_border_width=0, 
         margin=7,
     ),
+
+    layout.MonadWide(
+        border_width=2,
+        border_focus = amarillo3,
+        border_normal = gris,
+        single_border_width=0,
+        margin=7,
+    ),
+
+    layout.Bsp(
+        border_width=2,
+        border_focus = amarillo3,
+        border_normal = gris,
+        single_border_width=0,
+        margin=7,
+    ),
+
+    layout.Max(),
 ]
 
 
@@ -219,9 +227,9 @@ def init_widget_list():
                    borderwidth = 3,
                    active = blanco,
                    inactive = blanco,
-                   highlight_color = gris,
+                   highlight_color = "#5d5d5d",
                    highlight_method="line",
-                   this_current_screen_border = amarillo,
+                   this_current_screen_border = amarillo3,
                    background = negro,
                    foreground = blanco,
                 ),
@@ -235,15 +243,15 @@ def init_widget_list():
                 widget.TextBox(
                     text = '\uf0d9',
                     background = negro,
-                    foreground = amarillo,
+                    foreground = verde,
                     padding = 0,
                     fontsize = 37
                 ),
 
                 widget.WindowName(
-                    foreground=negro,
-                    background= amarillo,
-                    font = "Hack",
+                    foreground=blanco,
+                    background= verde,
+                    font = "Hack Bold",
                     fontsize = 13,
                     max_chars = 100,
                     padding = 5,
@@ -252,7 +260,7 @@ def init_widget_list():
                 widget.TextBox(
                     text = '\uf0da',
                     background = negro,
-                    foreground = amarillo,
+                    foreground = verde,
                     padding = 0,
                     fontsize = 37
                 ),
@@ -262,15 +270,6 @@ def init_widget_list():
                     padding = 4,
                     background = negro
                 ),
-
-               # widget.Notify(
-               #     padding = 4,
-               #     background = negro,
-               #     foreground = blanco,
-               #     foreground_low = amarillo2,
-               #     foreground_urgent = rojo,
-               #     default_timeout = 15,
-               # ),
                
                 widget.Mpris2(
                     name='spotify',
@@ -279,7 +278,21 @@ def init_widget_list():
                     scroll_chars=None,
                     stop_pause_text='',
                     markup = True,
-                    foreground = amarillo2,
+                    foreground = blanco,
+                    fontshadow = amarillo3,
+                    padding = 4,
+                    fmt = '🎶 {}',
+                    fontsize = 13
+                ),
+
+                widget.Mpris2(
+                    name='ncspot',
+                    objname="org.mpris.MediaPlayer2.ncspot",
+                    display_metadata=['xesam:title', 'xesam:artist'],
+                    scroll_chars=None,
+                    stop_pause_text='',
+                    foreground = blanco,
+                    fontshadow = amarillo3,
                     padding = 4,
                     fmt = '🎶 {}',
                     fontsize = 13
@@ -298,9 +311,28 @@ def init_widget_list():
                     padding = 0,
                     fontsize = 37
                 ),
+
+                widget.CurrentLayoutIcon(
+                    background = azul,
+                    foreground = blanco,
+                    padding = 3,
+                    scale = 0.7
+
+                ),
+
+                widget.CurrentLayout(
+                    background = azul,
+                    foreground = blanco,
+                ),
+
+                widget.Sep(
+                    linewidth = 0,
+                    padding = 4,
+                    background = azul
+                ),
                 
                 widget.TextBox(
-                    text = fa.icons['brain'],
+                    text = '| '+ fa.icons['brain'],
                     foreground = blanco,
                     background = azul,
                     padding = 3,
