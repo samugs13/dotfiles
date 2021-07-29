@@ -177,14 +177,6 @@ layouts = [
         margin=7,
     ),
 
-    layout.MonadWide(
-        border_width=2,
-        border_focus = amarillo3,
-        border_normal = gris,
-        single_border_width=0,
-        margin=7,
-    ),
-
     layout.Bsp(
         border_width=2,
         border_focus = amarillo3,
@@ -471,7 +463,7 @@ def init_widget_list():
                      background=negro,
                      foreground=blanco,
                      padding = 1,
-                     mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn("/home/s4mb4/Escritorio/scripts/dmenu-powermanagement.sh")}
+                     mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn("/home/s4mb4/Escritorio/scripts/dmenu-powermanager.sh")}
                 ),
 
                 widget.Sep(
