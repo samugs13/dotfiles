@@ -471,6 +471,7 @@ def init_widget_list():
                      background=negro,
                      foreground=blanco,
                      padding = 1,
+                     mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn("/home/s4mb4/Escritorio/scripts/dmenu-powermanagement.sh")}
                 ),
 
                 widget.Sep(
