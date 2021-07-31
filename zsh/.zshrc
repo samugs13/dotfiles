@@ -64,7 +64,7 @@ setopt GLOB_DOTS
 
 export HISTCONTROL=ignoreboth:erasedups
 
-# Make vim the default editor
+# Make nvim the default editor
 export EDITOR='nvim'
 export VISUAL='nvim'
 
@@ -161,7 +161,7 @@ alias vbm="sudo /usr/local/bin/arcolinux-vbox-share"
 #iso and version used to install ArcoLinux
 alias iso="cat /etc/dev-rel | awk -F '=' '/ISO/ {print $2}'"
 
-#vim for important configuration files
+#nvim for important configuration files
 alias vlightdm="sudo $EDITOR /etc/lightdm/lightdm.conf"
 alias vpacman="sudo $EDITOR /etc/pacman.conf"
 alias vgrub="sudo $EDITOR /etc/default/grub"
