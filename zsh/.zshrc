@@ -9,7 +9,7 @@ PROMPT+="%{$fg_bold[blue]%}%(! %{$fg_bold[red]%} )❯%{$fg_bold[cyan]%}%(1j %{$f
 HISTSIZE=10000000
 SAVEHIST=10000000
 HISTFILE=~/.cache/zsh/history
-HIST_STAMPS="dd/mm/yyyy"
+#HIST_STAMPS="dd/mm/yyyy"
 setopt appendhistory
 
 # Auto/tab
@@ -65,8 +65,8 @@ setopt GLOB_DOTS
 export HISTCONTROL=ignoreboth:erasedups
 
 # Make vim the default editor
-export EDITOR='vim'
-export VISUAL='vim'
+export EDITOR='nvim'
+export VISUAL='nvim'
 
 #PS1='[\u@\h \W]\$ '
 
