@@ -20,7 +20,7 @@ blueberry-tray &
 run cbatticon -i notification &
 run volumeicon &
 picom --config $HOME/.config/qtile/scripts/picom.conf &
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 dunst &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 run xautolock -time 10 -locker slock
 
