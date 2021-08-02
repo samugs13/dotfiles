@@ -19,9 +19,8 @@ numlockx on &
 blueberry-tray &
 run cbatticon -i notification &
 run volumeicon &
-#run variety &
 picom --config $HOME/.config/qtile/scripts/picom.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-/usr/lib/xfce4/notifyd/xfce4-notifyd &
+dunst &
 run xautolock -time 10 -locker slock
 
