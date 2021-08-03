@@ -1,16 +1,36 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # Enable colors and change prompt:
 autoload -U colors && colors # Load colors
 
+# Autoload info function
+autoload -Uz vcs_info
+
+# Enable substitution in the prompt.
+setopt prompt_subst
+
+# Run vcs_info just before a prompt is displayed (precmd)
+zstyle ':vcs_info:*' enable git svn
+precmd() {
+    vcs_info
+}
+
+# Format the vcs_info_msg_0_ variable
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' unstagedstr ' ●' #changes not added 
+zstyle ':vcs_info:*' stagedstr ' ✚' #added changes but not commited
+zstyle ':vcs_info:git:*' formats       '%F{#0000ff}(%F{#ffff00}%b%F{#ff6666}%u%F{#00ff99}%c%F{#0000ff})'
+zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c)'
+
+# Add path to the prompt
 PROMPT="%B%{$fg[magenta]%}%~%b "
 
-PROMPT+="%{$fg_bold[blue]%}%(! %{$fg_bold[red]%} )❯%{$fg_bold[cyan]%}%(1j %{$fg_bold[green]%} )❯%{$fg_bold[yellow]%}%(?  %{$fg_bold[yellow]%})❯%{$reset_color%} "
+# Add the arrows to the prompt, which works as follows:
+# First arrow: is this a root shell? (true=red, false=blue)
+# Second arrow: are there any running background jobs? (true=cyan, false=magenta)
+# Third arrow: did the last command fail to execute? (true=red, false=yellow)
+PROMPT+="%{$fg_bold[blue]%}%(! %{$fg_bold[red]%} )❱%{$fg_bold[cyan]%}%(1j %{$fg_bold[green]%} )❱%{$fg_bold[yellow]%}%(?  %{$fg_bold[red]%})❱%{$reset_color%} "
+
+# Show git info right to the prompt
+RPROMPT=\$vcs_info_msg_0_
 
 # Define history
 HISTSIZE=10000000
@@ -20,55 +40,67 @@ HISTFILE=~/.cache/zsh/history
 setopt appendhistory
 
 # Auto/tab
-autoload -Uz compinit
+autoload -U compinit
 zstyle ':completion:*' menu select
 compinit
 _comp_options+=(globdots)               # Include hidden files.
 
+# vi mode
+bindkey -v
+export KEYTIMEOUT=1
+
+# Change cursor shape for different vi modes.
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] ||
+     [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'
+  elif [[ ${KEYMAP} == main ]] ||
+       [[ ${KEYMAP} == viins ]] ||
+       [[ ${KEYMAP} = '' ]] ||
+       [[ $1 = 'beam' ]]; then
+    echo -ne '\e[5 q'
+  fi
+}
+zle -N zle-keymap-select
+zle-line-init() {
+    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
 # Use lf to switch directories and bind it to ctrl-f
 lfcd () {
-     tmp="$(mktemp)"
-     lf -last-dir-path="$tmp" "$@"
-     if [ -f "$tmp" ]; then
-         dir="$(cat "$tmp")"
-         rm -f "$tmp"
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
         [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
-      fi
- }
+    fi
+}
 bindkey -s '^f' 'lfcd\n'
 
-# my aliases 
- alias az="cp $HOME/.zshrc $HOME/Escritorio/dotfiles/zsh/"
+# Dotfiles aliases 
+ alias az="cp $HOME/.zshrc $HOME/Escritorio/dotfiles/zsh/ && cp -r $HOME/.config/zsh/plugins $HOME/Escritorio/dotfiles/zsh/"
  alias aa="cp $HOME/.config/alacritty/alacritty.yml $HOME/Escritorio/dotfiles/alacritty/"
- alias aq="cp $HOME/.config/qtile/config.py $HOME/Escritorio/dotfiles/qtile/ && cp -r $HOME/.config/qtile/wallpapers $HOME/Escritorio/dotfiles/qtile/ && cp $HOME/.config/qtile/autostart.sh $HOME/Escritorio/dotfiles/qtile/"
+ alias aq="cp $HOME/.config/qtile/config.py $HOME/Escritorio/dotfiles/qtile/ && cp -r $HOME/.config/qtile/wallpapers $HOME/Escritorio/dotfiles/qtile/ && cp $HOME/.config/qtile/autostart.sh $HOME/Escritorio/dotfiles/qtile/" 
 
 # Load plugins
-source /home/s4mb4/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /home/s4mb4/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-#Theme
-source ~/.config/powerlevel10k/powerlevel10k.zsh-theme
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+source /home/s4mb4/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /home/s4mb4/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ######DEFAULT#########
 
-# Path to oh-my-zsh installation.
-#export ZSH=/usr/share/oh-my-zsh/
-
-#ZSH_THEME=""
-
 # Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
+ DISABLE_MAGIC_FUNCTIONS=true
 
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
-
-#source $ZSH/oh-my-zsh.sh
 
 setopt GLOB_DOTS
 
@@ -93,7 +125,6 @@ fi
 
 #list
 alias ls='ls --color=auto'
-alias ls='lsd'
 alias la='ls -a'
 alias ll='ls -la'
 alias l='ls'
@@ -121,9 +152,6 @@ alias fgrep='fgrep --color=auto'
 #pacman unlock
 alias unlock="sudo rm /var/lib/pacman/db.lck"
 alias rmpacmanlock="sudo rm /var/lib/pacman/db.lck"
-
-#arcolinux logout unlock
-alias rmlogoutlock="sudo rm /tmp/arcologout.lock"
 
 #free
 alias free="free -mt"
@@ -194,6 +222,7 @@ alias vb="$EDITOR ~/.bashrc"
 alias vz="$EDITOR ~/.zshrc"
 alias vq="$EDITOR ~/.config/qtile/config.py"
 alias va="$EDITOR ~/.config/alacritty/alacritty.yml"
+alias vn="$EDITOR ~/.config/nvim/init.nvim"
 
 #systeminfo
 alias probe="sudo -E hw-probe -all -upload"
@@ -237,20 +266,6 @@ ex ()
 
 [[ -f ~/.zshrc-personal ]] && . ~/.zshrc-personal
 
-# reporting tools - install when not installed
-# install neofetch
+# reporting tools
 #neofetch
-# install screenfetch
-#screenfetch
-# install ufetch-git
 #ufetch
-# install ufetch-arco-git
-#ufetch-arco
-# install arcolinux-paleofetch-git
-#paleofetch
-# install alsi
-#alsi
-# install arcolinux-bin-git - standard on ArcoLinux isos (or sfetch - smaller)
-#hfetch
-# install lolcat
-#sfetch | lolcat
