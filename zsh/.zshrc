@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Enable colors and change prompt:
 autoload -U colors && colors # Load colors
 
@@ -39,12 +46,18 @@ bindkey -s '^f' 'lfcd\n'
 source /home/s4mb4/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /home/s4mb4/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+#Theme
+source ~/.config/powerlevel10k/powerlevel10k.zsh-theme
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 ######DEFAULT#########
 
 # Path to oh-my-zsh installation.
-export ZSH=/usr/share/oh-my-zsh/
+#export ZSH=/usr/share/oh-my-zsh/
 
-#ZSH_THEME="random"
+#ZSH_THEME=""
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS=true
@@ -55,7 +68,7 @@ export ZSH=/usr/share/oh-my-zsh/
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
 
-source $ZSH/oh-my-zsh.sh
+#source $ZSH/oh-my-zsh.sh
 
 setopt GLOB_DOTS
 
@@ -80,10 +93,15 @@ fi
 
 #list
 alias ls='ls --color=auto'
+alias ls='lsd'
 alias la='ls -a'
 alias ll='ls -la'
 alias l='ls'
+alias lt='ls --tree'
 alias l.="ls -A | egrep '^\.'"
+
+#bat as cat
+alias cat='bat'
 
 #fix obvious typo's
 alias cd..='cd ..'
@@ -225,7 +243,7 @@ ex ()
 # install screenfetch
 #screenfetch
 # install ufetch-git
-ufetch
+#ufetch
 # install ufetch-arco-git
 #ufetch-arco
 # install arcolinux-paleofetch-git
