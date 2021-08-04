@@ -1,0 +1,12 @@
+# Set the theme to "TwoDark". Run `bat --list-themes`
+# for a list of all available themes
+--theme="Dracula"
+
+# Show line numbers, Git modifications and file header (but no grid)
+--style="numbers,changes,header"
+
+# Use italic text on the terminal (not supported on all terminals)
+--italic-text=always
+
+# Use C++ syntax for .ino files
+--map-syntax "*.ino:C++"
