@@ -13,9 +13,11 @@ terminal ="alacritty"
 negro = "#282D39"
 blanco = "#ffffff"
 gris = "#636A78"
-azul = "#28307d"
+#azul="#000080"
+azul="#003366"
 azul2 = "84c7e7"
-rojo = "#BF616A"
+rojo = "#ff5879"
+gris2 = "#8292b2"
 amarillo = "#EBCB8B"
 
 ################################
@@ -32,22 +34,22 @@ extension_defaults = widget_defaults.copy()
 def init_widget_list():
     widget_list = [
 
-                 widget.TextBox(
-                     font = 'Ubuntu Bold',
-                     fontsize = 18,
-                     text= '⏻ ',
-                     background=gris,
-                     foreground=blanco,
-                     padding = 2,
-                     mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn("/home/s4mb4/Escritorio/scripts/dmenu-powermanager.sh")}
+                widget.TextBox(
+                    font = 'Ubuntu Bold',
+                    fontsize = 18,
+                    text= fa.icons['toggle-off'] + ' ',
+                    background=gris,
+                    foreground=blanco,
+                    padding = 2,
+                    mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn("/home/s4mb4/Escritorio/scripts/dmenu-powermanager.sh")}
                 ),
 
                 widget.TextBox(
-                    text = fa.icons["bolt"],
+                    text = fa.icons["bars"],
                     background = gris,
                     foreground = blanco,
                     padding = 2,
-                    fontsize = 15,
+                    fontsize = 18,
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('dmenu_run')},
                 ),
 
@@ -84,7 +86,7 @@ def init_widget_list():
 
                 widget.Sep(
                     linewidth = 0,
-                    padding = 4,
+                    padding = 5,
                     background = gris
                 ),
                 
@@ -98,13 +100,13 @@ def init_widget_list():
 
                 widget.GroupBox(
                    font = "Ubuntu Bold",
-                   fontsize = 14,
+                   fontsize = 15,
                    margin_y = 3,
                    margin_x = 0,
                    padding_y = 5,
                    padding_x = 3,
                    borderwidth = 3,
-                   active = amarillo,
+                   active = gris2,
                    inactive = blanco,
                    highlight_color = "#5d5d5d",
                    highlight_method="text",
@@ -123,7 +125,7 @@ def init_widget_list():
 
                 widget.Sep(
                     linewidth = 0,
-                    padding = 4,
+                    padding = 5,
                     background = gris
                 ),
 
@@ -138,7 +140,7 @@ def init_widget_list():
                 widget.CurrentLayoutIcon(
                     background = azul,
                     foreground = blanco,
-                    padding = 3,
+                    padding = 5,
                     scale = 0.7
 
                 ),
@@ -146,11 +148,12 @@ def init_widget_list():
                 widget.CurrentLayout(
                     background = azul,
                     foreground = blanco,
+                    padding = 3,
                 ),
 
                 widget.Sep(
                     linewidth = 0,
-                    padding = 4,
+                    padding = 3,
                     background = azul
                 ),
                 
@@ -165,13 +168,13 @@ def init_widget_list():
                     foreground = blanco,
                     background = azul,
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e htop')},
-                    format = 'CPU {freq_current}GHz {load_percent}%',
-                    padding = 0,
+                    format = 'CPU {load_percent}%',
+                    padding = 3,
                 ),
                 
                 widget.Sep(
                     linewidth = 0,
-                    padding = 4,
+                    padding = 3,
                     background = azul
                 ),
 
@@ -185,13 +188,13 @@ def init_widget_list():
                 widget.ThermalSensor(
                     background = azul,
                     foreground = blanco,
-                    padding = 2,
+                    padding = 3,
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' --hold -e sensors')},
                 ),
 
                 widget.Sep(
                     linewidth = 0,
-                    padding = 4,
+                    padding = 3,
                     background = azul
                 ),
 
@@ -208,14 +211,14 @@ def init_widget_list():
                     colour_have_updates = blanco,
                     background = azul,
                     distro = 'Arch_checkupdates',
-                    display_format = ' {updates}',
-                    no_update_string = 'N/A',
-                    padding = 0,
+                    display_format = '{updates} updates',
+                    no_update_string = 'no updates',
+                    padding = 3,
                 ),
 
                  widget.Sep(
                     linewidth = 0,
-                    padding = 4,
+                    padding = 3,
                     background = azul
                 ),
 
@@ -229,14 +232,14 @@ def init_widget_list():
                 widget.Backlight(
                    backlight_name = 'intel_backlight',
                    brightness_file = 'brightness',
-                   padding = 0,
+                   padding = 3,
                    background = azul,
                    foreground = blanco,
                 ),
 
                 widget.Sep(
                     linewidth = 0,
-                    padding = 4,
+                    padding = 3,
                     background = azul
                 ),
 
@@ -251,7 +254,7 @@ def init_widget_list():
                     format='%A %d de %B - %H:%M',
                     background = azul,
                     foreground = blanco,
-                    padding = 2,
+                    padding = 3,
                     mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn(terminal + " --hold -e cal -n 2")}
                 ),
 
