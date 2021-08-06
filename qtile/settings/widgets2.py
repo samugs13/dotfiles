@@ -140,7 +140,7 @@ def init_widget_list():
                 widget.CurrentLayoutIcon(
                     background = azul,
                     foreground = blanco,
-                    padding = 5,
+                    padding = 3,
                     scale = 0.7
 
                 ),
@@ -161,7 +161,7 @@ def init_widget_list():
                     text = '| '+fa.icons['brain'],
                     foreground = blanco,
                     background = azul,
-                    padding = 3,
+                    padding = 2,
                 ),
 
                 widget.CPU(
@@ -182,7 +182,7 @@ def init_widget_list():
                     text = '| '+ fa.icons['temperature-low'],
                     foreground = blanco,
                     background = azul,
-                    padding = 3,
+                    padding = 2,
                 ),
 
                 widget.ThermalSensor(
@@ -202,7 +202,7 @@ def init_widget_list():
                     text = '| ' + fa.icons['sync-alt'], 
                     background = azul,
                     foreground = blanco,
-                    padding = 3,
+                    padding = 2,
                 ),
 
                 widget.CheckUpdates(
@@ -226,7 +226,7 @@ def init_widget_list():
                    text = '| ' + fa.icons['sun'],
                    background = azul,
                    foreground = blanco,
-                   padding = 3,
+                   padding = 2,
                 ),
                 
                 widget.Backlight(
@@ -247,7 +247,7 @@ def init_widget_list():
                    text = "| ",
                    background = azul,
                    foreground = blanco,
-                   padding = 3,
+                   padding = 2,
                 ),
 
                 widget.Clock(
@@ -266,7 +266,7 @@ def init_widget_list():
 
                 widget.TextBox(
                     text = "|",
-                    padding = 3,
+                    padding = 2,
                     background = azul,
                     foreground = blanco,
                 ),
