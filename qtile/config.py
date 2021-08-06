@@ -133,18 +133,16 @@ keys = [
 #                                         GROUPS                                                      #
 #######################################################################################################
 
-# groups = [Group(i) for i in "12345"]
-
 __groups = {
-        1: Group(fa.icons['terminal']),
-        2: Group(fa.icons['globe']),
-        3: Group(fa.icons['folder-open']),
-        4: Group(fa.icons['code']),
-        5: Group(fa.icons['video']),
-        6: Group(fa.icons['photo-video']),
-        7: Group(fa.icons['spotify']),
-        8: Group(fa.icons['whatsapp']),
-        9: Group(fa.icons['skull-crossbones']),
+        1: Group(name=fa.icons['terminal'], layout='monadtall'),
+        2: Group(name=fa.icons['globe'], layout='monadtall'),
+        3: Group(name=fa.icons['folder-open'], layout='monadtall'),
+        4: Group(name=fa.icons['code'], layout='monadtall'),
+        5: Group(name=fa.icons['video'], layout='max'),
+        6: Group(name=fa.icons['photo-video'], layout='max'),
+        7: Group(name=fa.icons['spotify'], layout='max'),
+        8: Group(name=fa.icons['whatsapp'], layout='max'),
+        9: Group(name=fa.icons['skull-crossbones'], layout='floating'),
  }
 
 groups = [__groups[i] for i in __groups]
