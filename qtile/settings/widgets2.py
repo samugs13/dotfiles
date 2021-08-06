@@ -214,6 +214,7 @@ def init_widget_list():
                     display_format = '{updates} updates',
                     no_update_string = 'no updates',
                     padding = 3,
+                    mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn(terminal + " -e sudo pacman -Syu")}
                 ),
 
                  widget.Sep(
