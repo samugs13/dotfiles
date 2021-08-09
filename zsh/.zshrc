@@ -21,11 +21,11 @@ zstyle ':vcs_info:git:*' formats       '%F{#0000ff}(%F{#ffff00}%b%F{#ff6666}%u%F
 zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c)'
 
 # Add path to the prompt
-PROMPT="%B%{$fg[magenta]%}%~%b "
+PROMPT="%{$fg[magenta]%}%~ "
 
 # Add the arrows to the prompt, which works as follows:
 # First arrow: is this a root shell? (true=red, false=blue)
-# Second arrow: are there any running background jobs? (true=cyan, false=magenta)
+# Second arrow: are there any running background jobs? (true=cyan, false=green)
 # Third arrow: did the last command fail to execute? (true=red, false=yellow)
 PROMPT+="%{$fg_bold[blue]%}%(! %{$fg_bold[red]%} )❱%{$fg_bold[cyan]%}%(1j %{$fg_bold[green]%} )❱%{$fg_bold[yellow]%}%(?  %{$fg_bold[red]%})❱%{$reset_color%} "
 
@@ -83,9 +83,10 @@ lfcd () {
 bindkey -s '^f' 'lfcd\n'
 
 # Dotfiles aliases 
- alias az="cp $HOME/.zshrc $HOME/Escritorio/dotfiles/zsh/ && cp -r $HOME/.config/zsh/plugins $HOME/Escritorio/dotfiles/zsh/"
+ alias az="cp $HOME/.zshrc $HOME/Escritorio/dotfiles/zsh/"
  alias aa="cp $HOME/.config/alacritty/alacritty.yml $HOME/Escritorio/dotfiles/alacritty/"
- alias aq="cp $HOME/.config/qtile/config.py $HOME/Escritorio/dotfiles/qtile/ && cp -r $HOME/.config/qtile/wallpapers $HOME/Escritorio/dotfiles/qtile/ && cp $HOME/.config/qtile/autostart.sh $HOME/Escritorio/dotfiles/qtile/" 
+ alias aq="cp $HOME/.config/qtile/config.py $HOME/Escritorio/dotfiles/qtile/ && cp -r $HOME/.config/qtile/wallpapers $HOME/Escritorio/dotfiles/qtile/ && cp $HOME/.config/qtile/autostart.sh $HOME/Escritorio/dotfiles/qtile/ && cp -r $HOME/.config/qtile/settings $HOME/Escritorio/dotfiles/qtile/" 
+alias an="cp -r $HOME/.config/nvim $HOME/Escritorio/dotfiles/"
 
 # Load plugins
 source /home/s4mb4/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -94,7 +95,7 @@ source /home/s4mb4/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highli
 ######DEFAULT#########
 
 # Uncomment the following line if pasting URLs and other text is messed up.
- DISABLE_MAGIC_FUNCTIONS=true
+ DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
@@ -125,6 +126,7 @@ fi
 
 #list
 alias ls='ls --color=auto'
+alias ls='lsd'
 alias la='ls -a'
 alias ll='ls -la'
 alias l='ls'
@@ -265,6 +267,8 @@ ex ()
 #in there. They will not be overwritten by skel.
 
 [[ -f ~/.zshrc-personal ]] && . ~/.zshrc-personal
+
+figlet s4mb4
 
 # reporting tools
 #neofetch
