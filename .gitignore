@@ -16,5 +16,5 @@ env.bak/
 venv.bak/
 
 # directories
-plugged/*
+nvim/plugged/*
 
