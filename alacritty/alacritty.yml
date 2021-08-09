@@ -1,7 +1,7 @@
 env:
   TERM: xterm-256color
 
-background_opacity: 0.85
+background_opacity: 0.9
 
 window:
     decorations: full
@@ -12,46 +12,46 @@ window:
         y: 5
 font:
     normal:
-        family: Hack
+        family: Hack Nerd Font
         style: Regular
     bold:
-        family: Hack
+        family: Hack Nerd Font
         style: Bold
     italic:
-        family: Hack
+        family: Hack Nerd Font
         style: Italic
     bold_italic:
-        family: Hack
+        family: Hack Nerd Font
         style: Bold Italic
     size: 12.0
 
 colors:
   # Default colors
   primary:
-    background: '0x021b21'
-    foreground: '0xe8dfd6'
+    background: '#021b21'
+    foreground: '#e8dfd6'
 
   # Normal colors
   normal:
-    black:   '0x032c36'
-    red:     '0xc2454e'
-    green:   '0x7cbf9e'
-    yellow:  '0xb0ead9'
-    blue:    '0x31658c'
-    magenta: '0xff5879'
-    cyan:    '0x44b5b1'
-    white:   '0xf2f1b9'
+    black:   '#032c36'
+    red:     '#c2454e'
+    green:   '#7cbf9e'
+    yellow:  '#b0ead9'
+    blue:    '#31658c'
+    magenta: '#8292b2'
+    cyan:    '#44b5b1'
+    white:   '#f2f1b9'
 
   # Bright colors
   bright:
-    black:   '0x065f73'
-    red:     '0xef5847'
-    green:   '0xa2d9b1'
-    yellow:  '0x98c9bb'
-    blue:    '0x477ab3'
-    magenta: '0xff99a1'
-    cyan:    '0x9ed9d8'
-    white:   '0xf6f6c9'
+    black:   '#065f73'
+    red:     '#ef5847'
+    green:   '#a2d9b1'
+    yellow:  '#98c9bb'
+    blue:    '#477ab3'
+    magenta: '#95a7cc'
+    cyan:    '#9ed9d8'
+    white:   '#f6f6c9'
 
 cursor:
   style:
@@ -59,5 +59,7 @@ cursor:
     blinking: Off
 
 key_bindings:
-  - { key: V, mods: Alt, action: ToggleViMode }
+ - { key: V, mods: Alt, action: ToggleViMode }
+ - { key: V, mods: Control|Shift, action: Paste }
+ - { key: C, mods: Control|Shift, action: Copy }
 
