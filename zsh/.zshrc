@@ -21,7 +21,7 @@ zstyle ':vcs_info:git:*' formats       '%F{#0000ff}(%F{#ffff00}%b%F{#ff6666}%u%F
 zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c)'
 
 # Add path to the prompt
-PROMPT="%{$fg[magenta]%}%~ "
+PROMPT="%{$fg_bold[magenta]%}%~ "
 
 # Add the arrows to the prompt, which works as follows:
 # First arrow: is this a root shell? (true=red, false=blue)
@@ -29,7 +29,7 @@ PROMPT="%{$fg[magenta]%}%~ "
 # Third arrow: did the last command fail to execute? (true=red, false=yellow)
 PROMPT+="%{$fg_bold[blue]%}%(! %{$fg_bold[red]%} )❱%{$fg_bold[cyan]%}%(1j %{$fg_bold[green]%} )❱%{$fg_bold[yellow]%}%(?  %{$fg_bold[red]%})❱%{$reset_color%} "
 
-# Show git info right to the prompt
+# Show git info
 RPROMPT=\$vcs_info_msg_0_
 
 # Define history
@@ -113,6 +113,8 @@ export HISTCONTROL=ignoreboth:erasedups
 # Make nvim the default editor
 export EDITOR='nvim'
 export VISUAL='nvim'
+
+alias vim='nvim'
 
 #PS1='[\u@\h \W]\$ '
 
