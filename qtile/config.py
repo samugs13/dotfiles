@@ -13,8 +13,6 @@ import re
 import socket
 import subprocess
 
-from settings.widgets2 import init_widget_list,widget_defaults
-
 mod = "mod4"
 terminal ="alacritty"
 
@@ -22,15 +20,25 @@ terminal ="alacritty"
 #      COLORS       #
 #####################
 
-negro = "#282D39"
+# Load script to read colors from pywal
+from scripts import pywal_colors
+
+colors = pywal_colors.colors
+
 blanco = "#ffffff"
-gris = "#636A78"
-amarillo = "#b0ead9"
-azul = "#28307d"
-verde = "84c7e7"
-rojo = "#BF616A"
-beige = "#8292b2"
-amarillo2 = "#EBCB8B"
+fgcolor = colors[7]
+
+# colors = ["003b4c",     # Background
+#         "66a5ad",      
+#         "ececec",       
+#         "999999",     
+#         "73b8bf",     
+#         "50a5af",       
+#         "40848c",       
+#         "306369",       
+#         "204246",     
+#         "102123",       
+#         ]
 
 ################################################################################################################
 #                                                   KEYS                                                       #
@@ -47,7 +55,7 @@ keys = [
     Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
 
 # Move windows between left/right columns or move up/down in current stack.
-    
+
     Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
     Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
@@ -68,20 +76,20 @@ keys = [
         lazy.layout.add(),
         desc="Grow window left",
         ),
-    Key([mod, "control"], "l", 
+    Key([mod, "control"], "l",
         lazy.layout.grow_right(),
         lazy.layout.grow(),
         lazy.layout.increase_ratio(),
         lazy.layout.delete(),
         desc="Grow window right",
         ),
-    Key([mod, "control"], "j", 
+    Key([mod, "control"], "j",
         lazy.layout.grow_down(),
         lazy.layout.shrink(),
         lazy.layout.increase_nmaster(),
         desc="Grow window down",
         ),
-    Key([mod, "control"], "k", 
+    Key([mod, "control"], "k",
         lazy.layout.grow_up(),
         lazy.layout.grow(),
         lazy.layout.decrease_nmaster(),
@@ -91,33 +99,33 @@ keys = [
 
 # Toggle between split and unsplit sides of stack.
 # Split = all windows displayed | Unsplit = 1 window displayed but still with multiple stack panes
-   
+
     Key([mod, "shift"], "Return", lazy.layout.toggle_split(), desc="Toggle between split and unsplit sides of stack"),
 
 # Toggle between different layouts as defined below
-    
+
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    
+
 # Restart/Shutdown Qtile
 
     Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    
+
 # Function Keys
 
     Key([], "Print", lazy.spawn("flameshot gui")),
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set 5%+")),
-    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 5%-")), 
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 5%-")),
     Key([], "XF86AudioMute", lazy.spawn("amixer -q sset Master toggle")),
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer sset Master playback 5%-")),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer sset Master playback 5%+")),
     Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause")),
     Key([], "XF86AudioStop", lazy.spawn("playerctl stop")),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous")),
-    Key([], "XF86AudioNext", lazy.spawn("playerctl next")), 
+    Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
 
-# Apps
-    
+# Apps and scripts
+
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "r", lazy.run_extension(extension.DmenuRun())),
 
@@ -140,9 +148,9 @@ __groups = {
         4: Group(name=fa.icons['code'], layout='monadtall'),
         5: Group(name=fa.icons['video'], layout='max'),
         6: Group(name=fa.icons['photo-video'], layout='max'),
-        7: Group(name=fa.icons['spotify'], layout='max'),
-        8: Group(name=fa.icons['whatsapp'], layout='max'),
-        9: Group(name=fa.icons['skull-crossbones'], layout='floating'),
+        7: Group(name=fa.icons['music'], layout='max'),
+        8: Group(name=fa.icons['comments'], layout='max'),
+        9: Group(name=fa.icons['skull-crossbones'], layout='bsp'),
  }
 
 groups = [__groups[i] for i in __groups]
@@ -170,8 +178,8 @@ for i in groups:
 ################################
 
 layout_theme = {"border_width":3,
-                "border_focus": "#0000ff",
-                "border_normal": beige,
+                "border_focus": colors[7],
+                "border_normal": "#8292b2",
                 "single_border_width": 0,
                 "margin":7,
                 }
@@ -180,19 +188,234 @@ layouts = [
 
     layout.MonadTall(**layout_theme),
 
-    layout.Floating(**layout_theme),
-
     layout.Max(),
-]
+
+    layout.Bsp(**layout_theme),
+
+    ]
+
+################################
+#            WIDGETS           #
+################################
+
+widget_defaults = dict(
+    font='Hack',
+    fontsize=12,
+    padding = 2,
+)
+extension_defaults = widget_defaults.copy()
 
 ################################
 #            SCREENS           #
 ################################
 
-def init_screens():
-    return [Screen (top=bar.Bar(init_widget_list(), size=20, background = negro, margin = 5))]
+screens = [
 
-screens = init_screens()
+    Screen(
+
+        #TOP BAR
+        top=bar.Bar(
+            [
+                widget.Sep(
+                    linewidth = 0,
+                    padding = 5,
+                ),
+
+                widget.TextBox(
+                    font = 'Font Awesome 5 Free Solid',
+                    text = fa.icons["python"],
+                    background = colors[0],
+                    foreground = fgcolor,
+                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('dmenu_run')},
+                ),
+
+                widget.Sep(
+                    linewidth = 0,
+                    padding = 5,
+                    background = colors[0]
+                ),
+
+                widget.WindowName(
+                    font = "Hack Bold",
+                    background=colors[0],
+                    foreground=fgcolor,
+                    empty_group_string="Desktop",
+                    max_chars=100,
+                    fontsize = 12,
+                    padding = 0,
+                ),
+
+                widget.GroupBox(
+                   font = 'Font Awesome 5 Free Solid',
+                   active = colors[6],
+                   inactive = colors[7],
+                   highlight_method="block",
+                   this_current_screen_border = colors[5],
+                   block_highlight_text_color = colors[7],
+                   center_aligned = True,
+                   background = colors[0],
+                ),
+
+                widget.Spacer(
+                    background=colors[0],
+                    length = 715,
+                ),
+
+                widget.Systray(background = colors[0], padding = 3, icon_size=16),
+
+                widget.Sep(
+                    linewidth = 0,
+                    padding = 4,
+                    background = colors[0]
+                ),
+
+                widget.TextBox(
+                    font = 'Font Awesome 5 Free',
+                    fontsize = 12,
+                    text= fa.icons['power-off'] + ' ',
+                    foreground=colors[7],
+                    background = colors[0],
+                    padding = 0,
+                    mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn("/home/s4mb4/Escritorio/scripts/dmenu-powermanager.sh")}
+                ),
+
+                widget.Sep(
+                    linewidth = 0,
+                    padding = 5,
+                    background = colors[0],
+                ),
+            ],
+            
+            20,
+            margin = [4, 4, 0, 4], #top,right,bottom,left
+            background=colors[0],
+        ),
+
+
+        #BOTTOM BAR
+        bottom=bar.Bar(
+            [
+                widget.Spacer(
+                    length = 700,
+                    background = '#00000000',
+                ),
+
+              #  widget.TextBox(
+              #      text="\uf0d9",
+              #      fontsize = 37,
+              #      padding = 0,
+              #      foreground = azul,
+              #      background = '#00000000',
+              #  ),
+
+                widget.CurrentLayoutIcon(
+                    foreground = blanco,
+                    padding = 8,
+                    scale = 0.7
+                ),
+
+                widget.CurrentLayout(
+                    foreground = blanco,
+                    padding = 1,
+                ),
+
+                widget.Sep(
+                    linewidth = 0,
+                    padding = 3,
+                ),
+
+                widget.CPU(
+                    font = 'Font Awesome 5 Free',
+                    foreground = blanco,
+                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e htop')},
+                    format = '|  '+fa.icons['brain'] + ' CPU {load_percent}%',
+                    padding = 1,
+                ),
+
+                widget.Sep(
+                    linewidth = 0,
+                    padding = 3,
+                ),
+
+                widget.ThermalSensor(
+                    font = 'Font Awesome 5 Free',
+                    foreground = blanco,
+                    padding = 2,
+                    fmt = '|  '+ fa.icons['temperature-low'] + ' {}',
+                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' --hold -e sensors')},
+                ),
+
+                widget.Sep(
+                    linewidth = 0,
+                    padding = 3,
+                ),
+
+                widget.CheckUpdates(
+                    font = 'Font Awesome 5 Free',
+                    update_interval=20,
+                    foreground = blanco,
+                    colour_have_updates = blanco,
+                    distro = 'Arch_checkupdates',
+                    display_format = '|  ' + fa.icons['sync-alt'] + ' {updates} updates',
+                    no_update_string = 'no updates',
+                    padding = 2,
+                    mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn(terminal + " -e sudo pacman -Syu")}
+                ),
+
+                 widget.Sep(
+                    linewidth = 0,
+                    padding = 3,
+                ),
+
+                widget.Backlight(
+                   font = 'Font Awesome 5 Free Solid',
+                   backlight_name = 'intel_backlight',
+                   brightness_file = 'brightness',
+                   fmt = '|  '+ fa.icons['sun'] + ' {}',
+                   padding = 2,
+                   foreground = blanco,
+                ),
+
+                widget.Sep(
+                    linewidth = 0,
+                    padding = 3,
+                ),
+
+                widget.Clock(
+                    font = 'Font Awesome 5 Free Solid',
+                    format= '|  ' + fa.icons['calendar-alt'] + ' %d/%m/%y',
+                    foreground = blanco,
+                    padding = 1,
+                    mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn(terminal + " --hold -e cal -n 1")}
+                ),
+
+                widget.Sep(
+                    linewidth = 0,
+                    padding = 3,
+                ),
+
+                widget.Clock(
+                    font = 'Font Awesome 5 Free Solid',
+                    format= fa.icons['clock'] + ' %H:%M',
+                    foreground = blanco,
+                    padding = 3,
+                ),
+
+               # widget.TextBox(
+               #     text="\uf0da",
+               #     fontsize = 37,
+               #     padding = 0,
+               #     foreground = azul,
+               #     background = '#00000000',
+               # ),
+
+                ],
+            20,
+            margin = [0, 4, 3, 4],
+            background="#00000000",
+        ),
+    ),
+]
 
 
 
@@ -219,7 +442,7 @@ floating_layout = layout.Floating(float_rules=[
     Match(wm_class='ssh-askpass'),  # ssh-askpass
     Match(title='branchdialog'),  # gitk
     Match(title='pinentry'),  # GPG key password entry
-])
+], **layout_theme)
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
