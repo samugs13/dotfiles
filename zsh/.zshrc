@@ -89,6 +89,9 @@ alias aq="cp $HOME/.config/qtile/config.py $HOME/Escritorio/dotfiles/qtile/ && c
 alias an="cp -r $HOME/.config/nvim $HOME/Escritorio/dotfiles/"
 alias ad="cp -r $HOME/.config/dunst $HOME/Escritorio/dotfiles/"
 
+#Apply pywall colors to new terminal instances
+(cat ~/.cache/wal/sequences &)
+
 # Load plugins
 source /home/s4mb4/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /home/s4mb4/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
