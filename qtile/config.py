@@ -26,7 +26,6 @@ from scripts import pywal_colors
 colors = pywal_colors.colors
 
 blanco = "#ffffff"
-fgcolor = colors[7]
 
 # colors = ["003b4c",     # Background
 #         "66a5ad",      
@@ -178,8 +177,8 @@ for i in groups:
 ################################
 
 layout_theme = {"border_width":3,
-                "border_focus": colors[7],
-                "border_normal": "#8292b2",
+                "border_focus": "#0000ff",
+                "border_normal": "#021b21",
                 "single_border_width": 0,
                 "margin":7,
                 }
@@ -225,7 +224,7 @@ screens = [
                     font = 'Font Awesome 5 Free Solid',
                     text = fa.icons["python"],
                     background = colors[0],
-                    foreground = fgcolor,
+                    foreground = blanco,
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('dmenu_run')},
                 ),
 
@@ -238,7 +237,7 @@ screens = [
                 widget.WindowName(
                     font = "Hack Bold",
                     background=colors[0],
-                    foreground=fgcolor,
+                    foreground=colors[7],
                     empty_group_string="Desktop",
                     max_chars=100,
                     fontsize = 12,
@@ -251,7 +250,7 @@ screens = [
                    inactive = colors[7],
                    highlight_method="block",
                    this_current_screen_border = colors[5],
-                   block_highlight_text_color = colors[7],
+                   block_highlight_text_color = blanco,
                    center_aligned = True,
                    background = colors[0],
                 ),
@@ -273,7 +272,7 @@ screens = [
                     font = 'Font Awesome 5 Free',
                     fontsize = 12,
                     text= fa.icons['power-off'] + ' ',
-                    foreground=colors[7],
+                    foreground=blanco,
                     background = colors[0],
                     padding = 0,
                     mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn("/home/s4mb4/Escritorio/scripts/dmenu-powermanager.sh")}
@@ -411,7 +410,7 @@ screens = [
 
                 ],
             20,
-            margin = [0, 4, 3, 4],
+            margin = [0, 4, 4, 4],
             background="#00000000",
         ),
     ),
