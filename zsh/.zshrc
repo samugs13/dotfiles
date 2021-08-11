@@ -83,10 +83,11 @@ lfcd () {
 bindkey -s '^f' 'lfcd\n'
 
 # Dotfiles aliases 
- alias az="cp $HOME/.zshrc $HOME/Escritorio/dotfiles/zsh/"
- alias aa="cp $HOME/.config/alacritty/alacritty.yml $HOME/Escritorio/dotfiles/alacritty/"
- alias aq="cp $HOME/.config/qtile/config.py $HOME/Escritorio/dotfiles/qtile/ && cp -r $HOME/.config/qtile/wallpapers $HOME/Escritorio/dotfiles/qtile/ && cp $HOME/.config/qtile/autostart.sh $HOME/Escritorio/dotfiles/qtile/ && cp -r $HOME/.config/qtile/settings $HOME/Escritorio/dotfiles/qtile/" 
+alias az="cp $HOME/.zshrc $HOME/Escritorio/dotfiles/zsh/"
+alias aa="cp $HOME/.config/alacritty/alacritty.yml $HOME/Escritorio/dotfiles/alacritty/"
+alias aq="cp $HOME/.config/qtile/config.py $HOME/Escritorio/dotfiles/qtile/ && cp -r $HOME/.config/qtile/wallpapers $HOME/Escritorio/dotfiles/qtile/ && cp $HOME/.config/qtile/autostart.sh $HOME/Escritorio/dotfiles/qtile/ && cp -r $HOME/.config/qtile/scripts $HOME/Escritorio/dotfiles/qtile/" 
 alias an="cp -r $HOME/.config/nvim $HOME/Escritorio/dotfiles/"
+alias ad="cp -r $HOME/.config/dunst $HOME/Escritorio/dotfiles/"
 
 # Load plugins
 source /home/s4mb4/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
