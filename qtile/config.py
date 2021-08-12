@@ -176,7 +176,7 @@ for i in groups:
 #            LAYOUTS           #
 ################################
 
-layout_theme = {"border_width":3,
+layout_theme = {"border_width":2,
                 "border_focus": "#0000ff",
                 "border_normal": "#021b21",
                 "single_border_width": 0,
@@ -225,6 +225,7 @@ screens = [
                     text = fa.icons["python"],
                     background = colors[0],
                     foreground = blanco,
+                    fontsize = 14,
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('dmenu_run')},
                 ),
 
@@ -241,7 +242,7 @@ screens = [
                     empty_group_string="Desktop",
                     max_chars=100,
                     fontsize = 12,
-                    padding = 0,
+                    padding = 1,
                 ),
 
                 widget.GroupBox(
@@ -253,11 +254,12 @@ screens = [
                    block_highlight_text_color = blanco,
                    center_aligned = True,
                    background = colors[0],
+                   fontsize = 13,
                 ),
 
                 widget.Spacer(
                     background=colors[0],
-                    length = 715,
+                    length = 705,
                 ),
 
                 widget.Systray(background = colors[0], padding = 3, icon_size=16),
@@ -286,7 +288,7 @@ screens = [
             ],
             
             20,
-            margin = [4, 4, 0, 4], #top,right,bottom,left
+            margin = [4, 7, 0, 7], #top,right,bottom,left
             background=colors[0],
         ),
 
@@ -295,7 +297,7 @@ screens = [
         bottom=bar.Bar(
             [
                 widget.Spacer(
-                    length = 700,
+                    length = 685, #right=1350
                     background = '#00000000',
                 ),
 
@@ -356,7 +358,7 @@ screens = [
                     colour_have_updates = blanco,
                     distro = 'Arch_checkupdates',
                     display_format = '|  ' + fa.icons['sync-alt'] + ' {updates} updates',
-                    no_update_string = 'no updates',
+                    no_update_string = '|  ' + fa.icons['sync-alt'] + ' no updates',
                     padding = 2,
                     mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn(terminal + " -e sudo pacman -Syu")}
                 ),
@@ -410,7 +412,7 @@ screens = [
 
                 ],
             20,
-            margin = [0, 4, 4, 4],
+            margin = [0, 7, 4, 7],
             background="#00000000",
         ),
     ),
