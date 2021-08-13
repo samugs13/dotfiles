@@ -201,7 +201,7 @@ layouts = [
 
 widget_defaults = dict(
     font='Hack',
-    fontsize=12,
+    fontsize=14,
     padding = 2,
 )
 extension_defaults = widget_defaults.copy()
@@ -240,7 +240,7 @@ screens = [
                 widget.WindowName(
                     font = "Hack Bold",
                     background=colors[0],
-                    foreground=colors[7],
+                    foreground=colors[6],
                     empty_group_string="Desktop",
                     max_chars=90,
                     fontsize = 14,
@@ -249,10 +249,10 @@ screens = [
 
                 widget.GroupBox(
                    font = 'Font Awesome 5 Free Solid',
-                   active = colors[6],
+                   active = colors[3],
                    inactive = colors[7],
                    highlight_method="block",
-                   this_current_screen_border = colors[5],
+                   this_current_screen_border = colors[4],
                    block_highlight_text_color = blanco,
                    center_aligned = True,
                    background = colors[0],
@@ -299,7 +299,7 @@ screens = [
         bottom=bar.Bar(
             [
                 widget.Spacer(
-                    length = 685, #right=1350
+                    length = 640,
                     background = '#00000000',
                 ),
 
