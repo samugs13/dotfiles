@@ -4,7 +4,6 @@ from libqtile import qtile
 from libqtile import bar, layout, widget, extension, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
-from libqtile.utils import guess_terminal
 from libqtile.command import lazy
 
 import fontawesome as fa
@@ -128,11 +127,14 @@ keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "r", lazy.run_extension(extension.DmenuRun())),
 
+    Key([mod], "F4", lazy.spawn("/home/s4mb4/Escritorio/scripts/dmenu-togglescreenlayout.sh")),
     Key([mod], "b", lazy.spawn("brave --new-window")),
     Key([mod], "d", lazy.spawn("dolphin")),
+    Key([mod], "e", lazy.spawn("/home/s4mb4/Escritorio/scripts/dmenu-editconfigs.sh")),
     Key([mod], "s", lazy.spawn("spotify")),
     Key([mod], "w", lazy.spawn("brave --new-window https://web.whatsapp.com/")),
     Key([mod], "x", lazy.spawn("slock")),
+    Key([mod], "z", lazy.spawn("/home/s4mb4/Escritorio/scripts/dmenu-powersettings.sh")),
 ]
 
 
@@ -225,7 +227,7 @@ screens = [
                     text = fa.icons["python"],
                     background = colors[0],
                     foreground = blanco,
-                    fontsize = 14,
+                    fontsize = 15,
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('dmenu_run')},
                 ),
 
@@ -240,8 +242,8 @@ screens = [
                     background=colors[0],
                     foreground=colors[7],
                     empty_group_string="Desktop",
-                    max_chars=100,
-                    fontsize = 12,
+                    max_chars=90,
+                    fontsize = 14,
                     padding = 1,
                 ),
 
@@ -254,30 +256,30 @@ screens = [
                    block_highlight_text_color = blanco,
                    center_aligned = True,
                    background = colors[0],
-                   fontsize = 13,
+                   fontsize = 14,
                 ),
 
                 widget.Spacer(
                     background=colors[0],
-                    length = 705,
+                    length = 680,
                 ),
 
-                widget.Systray(background = colors[0], padding = 3, icon_size=16),
+                widget.Systray(background = colors[0],),
 
                 widget.Sep(
                     linewidth = 0,
-                    padding = 4,
+                    padding = 5,
                     background = colors[0]
                 ),
 
                 widget.TextBox(
                     font = 'Font Awesome 5 Free',
-                    fontsize = 12,
-                    text= fa.icons['power-off'] + ' ',
+                    fontsize = 14,
+                    text= fa.icons['toggle-off'] + ' ',
                     foreground=blanco,
                     background = colors[0],
                     padding = 0,
-                    mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn("/home/s4mb4/Escritorio/scripts/dmenu-powermanager.sh")}
+                    mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn("/home/s4mb4/Escritorio/scripts/dmenu-powersettings.sh")}
                 ),
 
                 widget.Sep(
@@ -287,7 +289,7 @@ screens = [
                 ),
             ],
             
-            20,
+            23,
             margin = [4, 7, 0, 7], #top,right,bottom,left
             background=colors[0],
         ),
