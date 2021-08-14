@@ -125,7 +125,7 @@ keys = [
 # Apps and scripts
 
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    Key([mod], "r", lazy.run_extension(extension.DmenuRun())),
+    Key([mod], "r", lazy.run_extension(extension.DmenuRun(fontsize=10))),
 
     Key([mod], "F4", lazy.spawn("/home/s4mb4/Escritorio/scripts/dmenu-togglescreenlayout.sh")),
     Key([mod], "b", lazy.spawn("brave --new-window")),
@@ -179,8 +179,8 @@ for i in groups:
 ################################
 
 layout_theme = {"border_width":2,
-                "border_focus": "#0000ff",
-                "border_normal": "#021b21",
+                "border_focus": colors[5],
+                "border_normal": colors[0],
                 "single_border_width": 0,
                 "margin":7,
                 }
