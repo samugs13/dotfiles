@@ -178,7 +178,7 @@ for i in groups:
 #            LAYOUTS           #
 ################################
 
-layout_theme = {"border_width":2,
+layout_theme = {"border_width":3,
                 "border_focus": colors[5],
                 "border_normal": colors[0],
                 "single_border_width": 0,
