@@ -14,14 +14,15 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight', "Syntax highlighting for NERDTre
 Plug 'ptzz/lf.vim', "File manager.
 Plug 'voldikss/vim-floaterm', "Floating window for lf.
 Plug 'JamshedVesuna/vim-markdown-preview', "Allow previewing markdown files in a browser.
-Plug 'Yggdroot/indentLine', "Vertical lines at each indentation level for code indented.
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }, "Asynchronous completion framework for neovim.
-Plug 'sheerun/vim-polyglot', "A collection of language packs for Vim.
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} "Highlighting.
+Plug 'neovim/nvim-lspconfig', "Configurations for Neovim's built-in language server client.
+Plug 'hrsh7th/nvim-compe', "Auto completion
+Plug 'nvim-lua/plenary.nvim', "Lua functions.
+Plug 'nvim-telescope/telescope.nvim', "Fuzzy finder.
 call plug#end()
 
 let mapleader =","
 
-set number
 set termguicolors
 set hidden
 
@@ -36,21 +37,31 @@ let g:lightline = { 'colorscheme': 'material', }
 "Enable autocompletion:
 set wildmode=longest,list,full
 
-"Key maps
+"NERDTree
 map <leader>t :NERDTreeToggle<CR>
-
-"NERD TREE
 "Start NERDTree when Vim starts with a directory argument.
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
     \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
 
-"Exclude indention on certain files and buffers
-let g:indentLine_fileTypeExclude = ['text', 'sh', 'help', 'terminal']
-let g:indentLine_bufNameExclude = ['NERD_tree.*', 'term:.*']
+"Vim-compe remaps
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 
-"Enable deoplete at startup
-let g:deoplete#enable_at_startup = 1
+"Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
-
-
+"Language server setup
+lua << EOF
+require'lspconfig'.pyright.setup{}
+require'lspconfig'.bashls.setup{}
+require'lspconfig'.cmake.setup{}
+require'lspconfig'.java_language_server.setup{}
+require'lspconfig'.html.setup{}
+EOF
