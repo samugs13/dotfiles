@@ -17,4 +17,4 @@ venv.bak/
 
 # directories
 nvim/plugged/*
-
+nvim/autoload/*
