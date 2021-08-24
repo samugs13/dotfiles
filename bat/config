@@ -1,6 +1,6 @@
-# Set the theme to "ansi". Run `bat --list-themes`
+# Set the theme to "TwoDark". Run `bat --list-themes`
 # for a list of all available themes
---theme="ansi"
+--theme="TwoDark"
 
 # Show line numbers, Git modifications and file header (but no grid)
 --style="numbers,changes,header"
