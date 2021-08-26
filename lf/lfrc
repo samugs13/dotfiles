@@ -1,0 +1,138 @@
+set ratios 1:2:3
+set shell zsh
+set shellopts '-eu'
+set previewer pistol
+set ifs "\n"
+set scrolloff 10
+set preview true
+set drawbox true
+set icons true
+set ignorecase true
+set hiddenfiles ".*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
+
+# cmds/functions
+cmd open ${{
+    case $(file --mime-type "$f" -bL) in
+        text/*|application/json) $EDITOR "$f";;
+	pdf/*) okular $fx;;
+        *) xdg-open "$f" ;;
+    esac
+}}
+
+cmd delete ${{
+	clear; tput cup $(($(tput lines)/3)); tput bold
+	set -f
+	printf "%s\n\t" "$fx"
+	printf "delete?[y/N]"
+	read ans
+	[ $ans = "y" ] && rm -rf -- $fx
+}}
+
+cmd mkdir ${{
+  printf "Directory Name: "
+  read ans
+  mkdir $ans
+}}
+
+cmd mkfile ${{
+  printf "File Name: "
+  read ans
+  $EDITOR $ans
+}}
+
+cmd sudomkfile ${{
+  printf "File Name: "
+  read ans
+  sudo $EDITOR $ans
+}}
+
+cmd chmod ${{
+  printf "Mode Bits: "
+  read ans
+
+  for file in "$fx"
+  do
+    chmod $ans $file
+  done
+
+  lf -remote 'send reload'
+}}
+
+cmd fzf_jump ${{
+  res="$(find . -maxdepth 3 | fzf --reverse --header='Jump to location')"
+  if [ -f "$res" ]; then
+    cmd="select"
+  elif [ -d "$res" ]; then
+    cmd="cd"
+  fi
+  lf -remote "send $id $cmd \"$res\""
+}}
+
+cmd zip %zip -r "$f" "$f"
+cmd tar %tar cvf "$f.tar" "$f"
+cmd targz %tar cvzf "$f.tar.gz" "$f"
+
+cmd extract ${{
+  case "$f" in
+      *.zip) unzip "$f" ;;
+      *.tar.gz) tar -xzvf "$f" ;;
+      *.rar) unrar e "$f" ;;
+      *.tar) tar -xvf "$f" ;;
+      *) echo "Unsupported format" ;;
+  esac
+}}
+
+cmd git_branch ${{
+    git branch | fzf | xargs git checkout 
+    pwd_shell=$(pwd)
+    lf -remote "send $id updir"
+    lf -remote "send $id cd \"$pwd_shell\""
+ }}
+
+# Bindings
+# Remove some defaults
+map m
+map "'"
+map '"'
+map e
+map f
+map c
+
+# Git
+map gb :git_branch
+map gp ${{clear; git pull --rebase || true; echo "press ENTER"; read ENTER}}
+map gs ${{clear; git status; echo "press ENTER"; read ENTER}}
+map gl ${{clear; git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit}}
+
+# File Openers
+map ee $$EDITOR "$f"
+map es $sudo $EDITOR "$f"
+map o $okular "$f"
+map <enter> open
+
+# Archive Mappings
+map az zip
+map at tar
+map ag targz
+map et extract
+
+# Basic Functions
+map . set hidden!
+map d delete
+map p paste
+map x cut
+map y copy
+map mf mkfile
+map ms sudomkfile
+map md mkdir
+map r rename
+map ch chmod
+map f fzf_jump
+map U top
+map D bottom
+map <c-u> half-up
+map <c-d> half-down
+map R reload
+map cc clear #clears copied/cut files
+map <space> toggle #selection
+map u unselect
