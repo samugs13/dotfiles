@@ -19,20 +19,21 @@ Plug 'neovim/nvim-lspconfig', "Configurations for Neovim's built-in language ser
 Plug 'hrsh7th/nvim-compe', "Auto completion
 Plug 'nvim-lua/plenary.nvim', "Lua functions.
 Plug 'nvim-telescope/telescope.nvim', "Fuzzy finder.
+Plug 'joshdick/onedark.vim', "Theme
 call plug#end()
 
-let mapleader =","
-
+let mapleader =" "
 set termguicolors
 set hidden
+set number
 
 "Set colorscheme
-syntax enable
+syntax on
+colorscheme onedark
 set background=dark
-colorscheme material-theme
 
 "Set lightline theme
-let g:lightline = { 'colorscheme': 'material', }
+let g:lightline = { 'colorscheme': 'one', }
 
 "Enable autocompletion:
 set wildmode=longest,list,full
