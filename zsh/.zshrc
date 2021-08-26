@@ -7,6 +7,9 @@ autoload -Uz vcs_info
 # Enable substitution in the prompt.
 setopt prompt_subst
 
+# Automatically cd into typed directory.
+setopt autocd 
+
 # Run vcs_info just before a prompt is displayed (precmd)
 zstyle ':vcs_info:*' enable git svn
 precmd() {
@@ -36,18 +39,28 @@ RPROMPT=\$vcs_info_msg_0_
 HISTSIZE=10000000
 SAVEHIST=10000000
 HISTFILE=~/.cache/zsh/history
-#HIST_STAMPS="dd/mm/yyyy"
+HIST_STAMPS="dd.mm.yyyy"
 setopt appendhistory
 
 # Auto/tab
 autoload -U compinit
 zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion::complete:*' gain-privileges 1
+zmodload zsh/complist
 compinit
 _comp_options+=(globdots)               # Include hidden files.
 
 # vi mode
 bindkey -v
 export KEYTIMEOUT=1
+
+# Use vim keys in tab complete menu:
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -v '^?' backward-delete-char
 
 # Change cursor shape for different vi modes.
 function zle-keymap-select {
@@ -87,9 +100,8 @@ alias az="cp $HOME/.zshrc $HOME/Escritorio/dotfiles/zsh/"
 alias aa="cp $HOME/.config/alacritty/alacritty.yml $HOME/Escritorio/dotfiles/alacritty/"
 alias aq="cp $HOME/.config/qtile/config.py $HOME/Escritorio/dotfiles/qtile/ && cp -r $HOME/.config/qtile/wallpapers $HOME/Escritorio/dotfiles/qtile/ && cp $HOME/.config/qtile/autostart.sh $HOME/Escritorio/dotfiles/qtile/ && cp -r $HOME/.config/qtile/scripts $HOME/Escritorio/dotfiles/qtile/" 
 alias an="cp -r $HOME/.config/nvim $HOME/Escritorio/dotfiles/"
-alias ad="cp -r $HOME/.config/dunst $HOME/Escritorio/dotfiles/"
 
-#Apply pywall colors to new terminal instances
+#Apply pywal colors to new terminal instances
 (cat ~/.cache/wal/sequences &)
 
 # Load plugins
@@ -230,7 +242,7 @@ alias vb="$EDITOR ~/.bashrc"
 alias vz="$EDITOR ~/.zshrc"
 alias vq="$EDITOR ~/.config/qtile/config.py"
 alias va="$EDITOR ~/.config/alacritty/alacritty.yml"
-alias vn="$EDITOR ~/.config/nvim/init.nvim"
+alias vn="$EDITOR ~/.config/nvim/init.vim"
 
 #systeminfo
 alias probe="sudo -E hw-probe -all -upload"
