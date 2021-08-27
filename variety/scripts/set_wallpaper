@@ -29,7 +29,7 @@
 # The default is to simply set WP=$1.
 WP=$1
 
-#When wallpaper is changed, change color palette for Qtile theme
+# When wallpaper is changed, change pywal's color palette.
 wal -i $3
 
 # Enlightenment
@@ -265,8 +265,10 @@ fi
 
 # OPTIONAL: Show a notification on automatic wallpaper change.
 # Display the original filename in the notification, but actually apply the post-effects image.
-# name=$(echo "$3" | sed 's/\//\n/g'| tail -n 1)
-# if [ "$2" == "auto" ]; then notify-send --icon "$WP" "Wallpaper changed" "$name" ; fi
+ name=$(echo "$3" | sed 's/\//\n/g'| tail -n 1)
+ if [ "$2" == "auto" ]; then notify-send --icon "$WP" "Wallpaper changed" "$name" ; 
+ elif [ "$2" == "manual" ]; then notify-send --icon "$WP" "Wallpaper changed" "$name" ;
+ fi
 
 
 ### ArcoLinux Solutions ###
@@ -301,13 +303,13 @@ fi
 # fi
 
 # Qtile : use either feh or nitrogen
-# if [ "$DESKTOP_SESSION" == "qtile" ] ; then
-#   if command -v "feh" >/dev/null 2>&1; then
-#     feh --bg-fill "$WP" 2> /dev/null
-#   elif command -v "nitrogen" >/dev/null 2>&1; then
-#     nitrogen --set-zoom-fill --save "$WP" 2> /dev/null
-#   fi
-# fi
+ if [ "$DESKTOP_SESSION" == "qtile" ] ; then
+   if command -v "feh" >/dev/null 2>&1; then
+     feh --bg-fill "$WP" 2> /dev/null
+   elif command -v "nitrogen" >/dev/null 2>&1; then
+     nitrogen --set-zoom-fill --save "$WP" 2> /dev/null
+   fi
+ fi
 
 
 # herbstluftwm : use either feh or nitrogen
