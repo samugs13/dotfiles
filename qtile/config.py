@@ -12,6 +12,7 @@ import re
 import socket
 import subprocess
 
+from scripts import arcobattery
 from libqtile.utils import guess_terminal
 
 mod = "mod4"
@@ -263,10 +264,19 @@ screens = [
 
                 widget.Spacer(
                     background=colors[0],
-                    length = 635,
+                    length = bar.STRETCH,
                 ),
                 
                 widget.Systray(background = colors[0]),
+                
+                arcobattery.BatteryIcon(
+                         padding=0,
+                         scale=0.7,
+                         y_poss=2,
+                         theme_path="/home/s4mb4/.config/qtile/icons/battery_icons_horiz",
+                         update_interval = 5,
+                         background = colors[0]
+                ),
 
                 widget.Spacer(
                     length = 2,
@@ -283,8 +293,8 @@ screens = [
 
                 widget.TextBox(
                     font = 'Font Awesome 5 Free',
-                    fontsize = 14,
-                    text= fa.icons['toggle-off'] + ' ',
+                    fontsize = 15,
+                    text= fa.icons['sign-out-alt'] + ' ',
                     foreground=blanco,
                     padding = 5,
                     background = colors[0],
@@ -293,7 +303,7 @@ screens = [
 
             ],
             
-            23,
+            size = 23,
             margin = [7, 7, 0, 7], #top,right,bottom,left
             background=colors[0],
         ),
@@ -394,12 +404,12 @@ screens = [
                     background = colors[4],
                 ),
 
-                # widget.CurrentLayoutIcon(
-                #     foreground = negro,
-                #     padding = 5,
-                #     scale = 0.7,
-                #     background = colors[4],
-                # ),
+#                 widget.CurrentLayoutIcon(
+#                     foreground = negro,
+#                     padding = 5,
+#                     scale = 0.7,
+#                     background = colors[4],
+#                 ),
 
                 widget.CurrentLayout(
                     foreground = negro,
@@ -415,7 +425,7 @@ screens = [
                     background = "#00000000",
                 ),
                 
-                widget.Spacer(length=1140),
+                widget.Spacer(length=bar.STRETCH), #1140
                 
                 widget.Image(
                     filename = '~/.config/qtile/icons/luffy.jpg'
@@ -427,7 +437,9 @@ screens = [
                     foreground = blanco,
                     padding = 5,
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal)},
-                )
+                ),
+
+                widget.Spacer(length=2)
                
                 ],
             20,
@@ -436,7 +448,6 @@ screens = [
         ),
     ),
 ]
-
 
 
 # Drag floating layouts.
@@ -462,6 +473,17 @@ floating_layout = layout.Floating(float_rules=[
     Match(wm_class='ssh-askpass'),  # ssh-askpass
     Match(title='branchdialog'),  # gitk
     Match(title='pinentry'),  # GPG key password entry
+    Match(title='confirm'),
+    Match(title='dialog'),
+    Match(title='download'),
+    Match(title='error'),
+    Match(title='file_progress'),
+    Match(title='notification'),
+    Match(title='splash'),
+    Match(title='toolbar'),
+    Match(title='Arandr'),
+    Match(title='feh'),
+    Match(title='Open File'),
 ], **layout_theme)
 auto_fullscreen = True
 focus_on_window_activation = "smart"
