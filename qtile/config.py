@@ -151,11 +151,11 @@ __groups = {
         2: Group(name=fa.icons['globe'], layout='monadtall'),
         3: Group(name=fa.icons['folder-open'], layout='monadtall'),
         4: Group(name=fa.icons['code'], layout='monadtall'),
-        5: Group(name=fa.icons['video'], layout='maximized'),
-        6: Group(name=fa.icons['photo-video'], layout='maximized'),
-        7: Group(name=fa.icons['music'], layout='maximized'),
-        8: Group(name=fa.icons['comment-dots'], layout='maximized'),
-        9: Group(name=fa.icons['skull-crossbones'], layout='BSPlayout'),
+        5: Group(name=fa.icons['video'], layout='max'),
+        6: Group(name=fa.icons['photo-video'], layout='max'),
+        7: Group(name=fa.icons['music'], layout='max'),
+        8: Group(name=fa.icons['comment-dots'], layout='max'),
+        9: Group(name=fa.icons['skull-crossbones'], layout='bsp'),
  }
 
 groups = [__groups[i] for i in __groups]
@@ -193,11 +193,9 @@ layouts = [
 
     layout.MonadTall(**layout_theme),
 
-    layout.Max(name='maximized'),
+    layout.Max(),
 
-    layout.Bsp(
-        name='BSPlayout',
-        **layout_theme),
+    layout.Bsp(**layout_theme),
 
     ]
 
@@ -260,6 +258,7 @@ screens = [
                    center_aligned = True,
                    background = colors[0],
                    fontsize = 14,
+                   disable_drag = True,
                 ),
 
                 widget.Spacer(
@@ -280,10 +279,11 @@ screens = [
 
                 widget.Spacer(
                     length = 2,
-                ),
+                ), 
 
                 widget.Clock(
-                    format= '%H:%M',
+                    font='Fontawesome 5 Free Solid',
+                    format= fa.icons['clock']+' %H:%M',
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' --hold -e tty-clock -s')},
                 ),
 
@@ -296,7 +296,7 @@ screens = [
                     fontsize = 15,
                     text= fa.icons['sign-out-alt'] + ' ',
                     foreground=blanco,
-                    padding = 5,
+                    padding = 3,
                     background = colors[0],
                     mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn("/home/s4mb4/Escritorio/scripts/dmenu-powersettings.sh")}
                 ),
@@ -319,7 +319,7 @@ screens = [
                     padding = 7,
                     foreground = negro,
                     background = colors[2],
-                    mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn(terminal + " --hold -e cal -n 1")}
+                    mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn(terminal + " --hold -e cal -n 2")}
                 ),
                 
                 widget.TextBox(
@@ -338,7 +338,7 @@ screens = [
                     colour_no_updates = negro,
                     distro = 'Arch_checkupdates',
                     display_format = fa.icons['sync-alt'] + ' {updates} updates',
-                    no_update_string = fa.icons['sync-alt'] + ' no updates',
+                    no_update_string = fa.icons['sync-alt'] + ' updated',
                     padding = 5,
                     mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn(terminal + " -e sudo pacman -Syu")},
                     background = colors[5],
@@ -404,12 +404,12 @@ screens = [
                     background = colors[4],
                 ),
 
-#                 widget.CurrentLayoutIcon(
-#                     foreground = negro,
-#                     padding = 5,
-#                     scale = 0.7,
-#                     background = colors[4],
-#                 ),
+                # widget.CurrentLayoutIcon(
+                #     foreground = negro,
+                #     padding = 5,
+                #     scale = 0.7,
+                #     background = colors[4],
+                # ),
 
                 widget.CurrentLayout(
                     foreground = negro,
@@ -425,7 +425,7 @@ screens = [
                     background = "#00000000",
                 ),
                 
-                widget.Spacer(length=bar.STRETCH), #1140
+                widget.Spacer(length=bar.STRETCH),
                 
                 widget.Image(
                     filename = '~/.config/qtile/icons/luffy.jpg'
@@ -481,7 +481,7 @@ floating_layout = layout.Floating(float_rules=[
     Match(title='notification'),
     Match(title='splash'),
     Match(title='toolbar'),
-    Match(title='Arandr'),
+    Match(title='arandr'),
     Match(title='feh'),
     Match(title='Open File'),
 ], **layout_theme)
