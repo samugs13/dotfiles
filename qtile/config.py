@@ -135,6 +135,7 @@ keys = [
     Key([mod], "F5", lazy.spawn("/home/s4mb4/Escritorio/scripts/dmenu-audiosettings.sh")),
     Key([mod], "b", lazy.spawn("brave --new-window")),
     Key([mod], "d", lazy.spawn("dolphin")),
+    Key([mod], "n", lazy.spawn("brave --new-window https://www.netflix.com/browse")),
     Key([mod], "s", lazy.spawn("spotify")),
     Key([mod], "w", lazy.spawn("brave --new-window https://web.whatsapp.com/")),
     Key([mod], "x", lazy.spawn("slock")),
@@ -315,7 +316,7 @@ screens = [
                
                 widget.Clock(
                     font = 'Font Awesome 5 Free',
-                    format= fa.icons['calendar-alt'] + '  %a, %d de %h de %Y',
+                    format= fa.icons['calendar-alt'] + ' %a, %d de %h de %Y',
                     padding = 7,
                     foreground = negro,
                     background = colors[2],
@@ -428,7 +429,8 @@ screens = [
                 widget.Spacer(length=bar.STRETCH),
                 
                 widget.Image(
-                    filename = '~/.config/qtile/icons/luffy.jpg'
+                    filename = '~/.config/qtile/icons/luffy.jpg',
+                    mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn("brave --new-window https://www9.animeflv.cc/anime/one-piece-tv")},
                 ),
 
                 widget.TextBox(
