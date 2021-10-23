@@ -136,6 +136,7 @@ keys = [
     Key([mod], "b", lazy.spawn("brave --new-window")),
     Key([mod], "d", lazy.spawn("dolphin")),
     Key([mod], "n", lazy.spawn("brave --new-window https://www.netflix.com/browse")),
+    Key([mod], "o", lazy.spawn("okular")),
     Key([mod], "s", lazy.spawn("spotify")),
     Key([mod], "w", lazy.spawn("brave --new-window https://web.whatsapp.com/")),
     Key([mod], "x", lazy.spawn("slock")),
@@ -486,6 +487,7 @@ floating_layout = layout.Floating(float_rules=[
     Match(title='arandr'),
     Match(title='feh'),
     Match(title='Open File'),
+    Match(title='Qalculate!'),
 ], **layout_theme)
 auto_fullscreen = True
 focus_on_window_activation = "smart"
