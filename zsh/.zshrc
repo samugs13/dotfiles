@@ -24,7 +24,8 @@ zstyle ':vcs_info:git:*' formats       '%F{#0000ff}(%F{#ffff00}%b%F{#ff6666}%u%F
 zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c)'
 
 # Add path to the prompt
-PROMPT="%{$fg_bold[magenta]%}%~ "
+PROMPT="%{$fg_bold[magenta]%}%(4~|.../%3~|%~) " 
+# Checks if the path is at least 4 elements long %(4~|true|false) and, if true, prints some dots with the last 3 elements (.../%3~), otherwise the full path is printed %~
 
 # Add the arrows to the prompt, which works as follows:
 # First arrow: is this a root shell? (true=red, false=blue)
@@ -101,7 +102,7 @@ alias aa="cp $HOME/.config/alacritty/alacritty.yml $HOME/Escritorio/dotfiles/ala
 alias aq="cp $HOME/.config/qtile/config.py $HOME/Escritorio/dotfiles/qtile/ && cp -r $HOME/.config/qtile/wallpapers $HOME/Escritorio/dotfiles/qtile/ && cp $HOME/.config/qtile/autostart.sh $HOME/Escritorio/dotfiles/qtile/ && cp -r $HOME/.config/qtile/scripts $HOME/Escritorio/dotfiles/qtile/" 
 alias an="cp -r $HOME/.config/nvim $HOME/Escritorio/dotfiles/"
 
-#Apply pywal colors to new terminal instances
+# Apply pywal colors to new terminal instances
 (cat ~/.cache/wal/sequences &)
 
 # Load plugins
@@ -254,6 +255,8 @@ alias sr="sudo reboot"
 #give the list of all installed desktops - xsessions desktops
 alias xd="ls /usr/share/xsessions"
 
+#other
+alias dia="setsid -f dia --integrated" 
 # # ex = EXtractor for all kinds of archives
 # # usage: ex <file>
 ex ()
