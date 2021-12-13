@@ -17,7 +17,7 @@ run nm-applet &
 run xfce4-power-manager &
 numlockx on &
 blueberry-tray &
-run cbatticon -i notification &
+#run cbatticon -i notification &
 run volumeicon &
 run variety &
 wal -R	# -R restores the last colorscheme and wallpaper that was in use.

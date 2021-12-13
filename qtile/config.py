@@ -503,9 +503,7 @@ def autostart():
     subprocess.call(path + "autostart.sh")
 
 # Alternative autostart:
-#cmd = [
-#     "commands",
-#]
-# 
-#for x in cmd:
-#    os.system(x)
+cmd = ["xrandr --dpi 96"]
+
+for x in cmd:
+    os.system(x)
