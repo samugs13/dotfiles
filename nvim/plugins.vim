@@ -13,6 +13,7 @@ Plug 'hrsh7th/cmp-cmdline',
 Plug 'itchyny/lightline.vim', "Status bar.
 Plug 'ap/vim-css-color', "Hex colors.
 Plug 'ryanoasis/vim-devicons', "Icons for NERDTree.
+Plug 'kyazdani42/nvim-web-devicons', "Icons for barbar
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight', "Syntax highlighting for NERDTree
 Plug 'joshdick/onedark.vim', "Theme
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} "Highlighting.
@@ -33,10 +34,10 @@ Plug 'neovim/nvim-lspconfig', "Configurations for Neovim's built-in language ser
 Plug 'nvim-lua/plenary.nvim', "Lua functions.
 Plug 'nvim-telescope/telescope.nvim', "Fuzzy finder.
 Plug 'github/copilot.vim',
+Plug 'romgrk/barbar.nvim',
 
 "snippets
 Plug 'hrsh7th/cmp-vsnip', "Snippet
-Plug 'hrsh7th/vim-vsnip', "Snippet
-
+Plug 'hrsh7th/vim-vsnip', "snippets
 call plug#end()
 
