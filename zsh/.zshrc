@@ -106,8 +106,8 @@ alias an="cp -r $HOME/.config/nvim $HOME/Escritorio/dotfiles/"
 (cat ~/.cache/wal/sequences &)
 
 # Load plugins
-source /home/s4mb4/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /home/s4mb4/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ######DEFAULT#########
 
@@ -289,7 +289,7 @@ ex ()
 
 [[ -f ~/.zshrc-personal ]] && . ~/.zshrc-personal
 
-figlet s4mb4
+#figlet s4mb4
 
 # reporting tools
 #neofetch
