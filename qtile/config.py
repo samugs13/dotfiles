@@ -8,13 +8,14 @@ from libqtile.command import lazy
 
 import fontawesome as fa
 import os
-import re
-import socket
 import subprocess
+import socket
 
 from scripts import arcobattery
 from libqtile.utils import guess_terminal
+from scripts import getIP
 
+ip = getIP.ip
 mod = "mod4"
 terminal =guess_terminal()
 
@@ -27,8 +28,9 @@ from scripts import pywal_colors
 
 colors = pywal_colors.colors
 
-blanco = "#ffffff"
+blanco = "#e8eae9"
 negro = "#000000"
+gris = '#1e2126'
 
 # colors = ["#003b4c",     # Background
         # "#66a5ad",      
@@ -97,7 +99,8 @@ keys = [
         lazy.layout.decrease_nmaster(),
         desc="Grow window up",
     ),
-    Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+
+    Key([mod, "control"], "r", lazy.layout.normalize(), desc="Reset all window sizes"),
 
 # Toggle between split and unsplit sides of stack.
 # Split = all windows displayed | Unsplit = 1 window displayed but still with multiple stack panes
@@ -112,6 +115,10 @@ keys = [
 
     Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+
+# Switch keyboard layout
+    
+    Key([mod], "k", lazy.widget["keyboardlayout"].next_keyboard(), desc="Next keyboard layout."),
 
 # Function Keys
 
@@ -131,8 +138,8 @@ keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "r", lazy.run_extension(extension.DmenuRun(fontsize=11))),
     
-    Key([mod], "F4", lazy.spawn("/home/s4mb4/Escritorio/scripts/dmenu-togglescreenlayout.sh")),
-    Key([mod], "F5", lazy.spawn("/home/s4mb4/Escritorio/scripts/dmenu-audiosettings.sh")),
+    Key([mod], "F4", lazy.spawn(os.environ["HOME"] + "/Escritorio/scripts/dmenu-togglescreenlayout.sh")),
+    Key([mod], "F5", lazy.spawn(os.environ["HOME"] + "/Escritorio/scripts/dmenu-audiosettings.sh")),
     Key([mod], "b", lazy.spawn("brave --new-window")),
     Key([mod], "d", lazy.spawn("dolphin")),
     Key([mod], "n", lazy.spawn("brave --new-window https://www.netflix.com/browse")),
@@ -140,7 +147,7 @@ keys = [
     Key([mod], "s", lazy.spawn("spotify")),
     Key([mod], "w", lazy.spawn("brave --new-window https://web.whatsapp.com/")),
     Key([mod], "x", lazy.spawn("slock")),
-    Key([mod], "z", lazy.spawn("/home/s4mb4/Escritorio/scripts/dmenu-powersettings.sh")),
+    Key([mod], "z", lazy.spawn(os.environ["HOME"] + "/Escritorio/scripts/dmenu-powersettings.sh")),
 ]
 
 
@@ -154,7 +161,7 @@ __groups = {
         3: Group(name=fa.icons['folder-open'], layout='monadtall'),
         4: Group(name=fa.icons['code'], layout='monadtall'),
         5: Group(name=fa.icons['video'], layout='max'),
-        6: Group(name=fa.icons['photo-video'], layout='max'),
+        6: Group(name=fa.icons['edit'], layout='max'),
         7: Group(name=fa.icons['music'], layout='max'),
         8: Group(name=fa.icons['comment-dots'], layout='max'),
         9: Group(name=fa.icons['skull-crossbones'], layout='bsp'),
@@ -243,7 +250,7 @@ screens = [
                 widget.WindowName(
                     font = "Hack Bold",
                     background=colors[0],
-                    foreground=colors[6],
+                    foreground=colors[4],
                     empty_group_string="Desktop",
                     max_chars=90,
                     fontsize = 14,
@@ -284,8 +291,8 @@ screens = [
                 ), 
 
                 widget.Clock(
-                    font='Fontawesome 5 Free Solid',
-                    format= fa.icons['clock']+' %H:%M',
+                    font ='Hack Nerd Font',
+                    format= '%H:%M',
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' --hold -e tty-clock -s')},
                 ),
 
@@ -295,10 +302,10 @@ screens = [
 
                 widget.TextBox(
                     font = 'Font Awesome 5 Free',
-                    fontsize = 15,
-                    text= fa.icons['sign-out-alt'] + ' ',
+                    fontsize = 17,
+                    text = fa.icons['sign-out-alt'],
                     foreground=blanco,
-                    padding = 3,
+                    padding = 5,
                     background = colors[0],
                     mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn("/home/s4mb4/Escritorio/scripts/dmenu-powersettings.sh")}
                 ),
@@ -314,13 +321,12 @@ screens = [
         #BOTTOM BAR
         bottom=bar.Bar(
             [
-               
                 widget.Clock(
                     font = 'Font Awesome 5 Free',
                     format= fa.icons['calendar-alt'] + ' %a, %d de %h de %Y',
                     padding = 7,
                     foreground = negro,
-                    background = colors[2],
+                    background = colors[3],
                     mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn(terminal + " --hold -e cal -n 2")}
                 ),
                 
@@ -328,22 +334,16 @@ screens = [
                     text="\uf0da",
                     fontsize = 37,
                     padding = 0,
-                    foreground = colors[2],
+                    foreground = colors[3],
                     background = colors[5],
                 ),
 
-                widget.CheckUpdates(
-                    font = 'Font Awesome 5 Free',
-                    update_interval=20,
-                    foreground = negro,
-                    colour_have_updates = negro,
-                    colour_no_updates = negro,
-                    distro = 'Arch_checkupdates',
-                    display_format = fa.icons['sync-alt'] + ' {updates} updates',
-                    no_update_string = fa.icons['sync-alt'] + ' updated',
-                    padding = 5,
-                    mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn(terminal + " -e sudo pacman -Syu")},
+                widget.KeyboardLayout(
+                    configured_keyboards = ['es','us'],
+                    fmt = fa.icons['keyboard'] + ' {}',
                     background = colors[5],
+                    padding = 5,
+                    foreground = negro,
                 ),
 
                 widget.TextBox(
@@ -351,7 +351,103 @@ screens = [
                     fontsize = 37,
                     padding = 0,
                     foreground = colors[5],
-                    background = colors[3],
+                    background = colors[2],
+                ),
+
+                widget.TextBox(
+                    font = 'Font Awesome 5 Free',
+                    text = fa.icons['user-secret'] + ' ' + ip,
+                    padding = 5,
+                    foreground = negro,
+                    background = colors[2],
+                    mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn(terminal + " --hold -e ip a")}, 
+                ),
+
+                widget.TextBox(
+                    text="\uf0da",
+                    fontsize = 37,
+                    padding = 0,
+                    foreground = colors[2],
+                    background = colors[6],
+                ),
+                
+                widget.CheckUpdates(
+                    font = 'Font Awesome 5 Free',
+                    update_interval=20,
+                    foreground = negro,
+                    colour_have_updates = negro,
+                    colour_no_updates = negro,
+                    distro = 'Arch_checkupdates',
+                    display_format = fa.icons['sync'] + ' {updates} updates',
+                    no_update_string = fa.icons['sync'] + ' updated',
+                    padding = 5,
+                    mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn(terminal + " -e sudo pacman -Syu")},
+                    background = colors[6],
+                ),
+
+                widget.TextBox(
+                    text="\uf0da",
+                    fontsize = 37,
+                    padding = 0,
+                    foreground = colors[6],
+                    background = colors[1],
+                ),
+
+                widget.CurrentLayoutIcon(
+                    foreground = negro,
+                    padding = 5,
+                    scale = 0.7,
+                    background = colors[1],
+                ),
+
+                widget.CurrentLayout(
+                    foreground = blanco,
+                    padding = 0,
+                    background = colors[1],
+                    fmt = '{} '
+                ),
+                
+                widget.TextBox(
+                    text="\uf0da",
+                    fontsize = 37,
+                    padding = 0,
+                    foreground = colors[1],
+                    background = "#00000000",
+                ),
+                
+                widget.Spacer(length=bar.STRETCH),
+               
+                widget.WidgetBox(widgets=[
+                    
+                    widget.LaunchBar(
+                        progs=[
+                            (fa.icons['discord'], 'brave --new-window https://www.discord.com', 'Discord'),
+                            (fa.icons['github'], 'brave --new-window https://www.github.com', 'Github'),
+                            (fa.icons['reddit-alien'], 'brave --new-window https://www.reddit.com', 'Reddit'),
+                            (fa.icons['twitch'], 'brave --new-window https://www.twitch.com', 'Twitch'),
+                            (fa.icons['youtube'], 'brave --new-window https://www.youtube.com', 'Youtube'),
+                            (fa.icons['spotify'], 'spotify', 'Spotify'),
+                            (fa.icons['skype'], 'skypeforlinux', 'Skype'),
+                            (fa.icons['linkedin'], 'brave --new-window https://www.linkedin.com', 'LinkedIn'),
+                        ],
+                    ),
+
+                ],
+                    font = 'Font Awesome 5 Free',
+                    fontsize = 16,
+                    foreground = blanco,
+                    text_closed = fa.icons['dragon'],
+                    text_open = fa.icons['docker'],
+                ),
+                     
+                widget.Spacer(length=bar.STRETCH),
+                
+                widget.TextBox(
+                    text="\uf0d9",
+                    fontsize = 37,
+                    padding = 0,
+                    foreground = colors[1],
+                    background = "#00000000",
                 ),
 
                 widget.Backlight(
@@ -360,16 +456,16 @@ screens = [
                    brightness_file = 'brightness',
                    fmt = fa.icons['sun'] + ' {}',
                    padding = 5,
-                   foreground = negro,
-                   background = colors[3],
+                   foreground = blanco,
+                   background = colors[1],
                 ),
 
                 widget.TextBox(
-                    text="\uf0da",
+                    text="\uf0d9",
                     fontsize = 37,
                     padding = 0,
-                    foreground = colors[3],
-                    background = colors[6],
+                    foreground = colors[6],
+                    background = colors[1],
                 ),
 
                 widget.ThermalSensor(
@@ -382,11 +478,11 @@ screens = [
                 ),
 
                 widget.TextBox(
-                    text="\uf0da",
+                    text="\uf0d9",
                     fontsize = 37,
                     padding = 0,
-                    foreground = colors[6],
-                    background = colors[1],
+                    foreground = colors[2],
+                    background = colors[6],
                 ),
 
                 widget.CPU(
@@ -395,56 +491,46 @@ screens = [
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e htop')},
                     format = fa.icons['brain'] + ' CPU {load_percent}%',
                     padding = 5,
-                    background = colors[1]
+                    background = colors[2]
                 ),
-
+                
                 widget.TextBox(
-                    text="\uf0da",
+                    text="\uf0d9",
                     fontsize = 37,
                     padding = 0,
-                    foreground = colors[1],
-                    background = colors[4],
+                    foreground = colors[5],
+                    background = colors[2],
                 ),
 
-                # widget.CurrentLayoutIcon(
-                #     foreground = negro,
-                #     padding = 5,
-                #     scale = 0.7,
-                #     background = colors[4],
-                # ),
-
-                widget.CurrentLayout(
+                widget.DF(
+                    visible_on_warn = False,
+                    font = 'Font Awesome 5 Free',
+                    fmt = fa.icons['hdd'] + ' {}',
                     foreground = negro,
-                    padding = 5,
-                    background = colors[4]
+                    background = colors[5],
+                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' --hold -e df -h')},
+                    
                 ),
                 
                 widget.TextBox(
-                    text="\uf0da",
+                    text="\uf0d9",
                     fontsize = 37,
                     padding = 0,
-                    foreground = colors[4],
-                    background = "#00000000",
-                ),
-                
-                widget.Spacer(length=bar.STRETCH),
-                
-                widget.Image(
-                    filename = '~/.config/qtile/icons/luffy.jpg',
-                    mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn("brave --new-window https://www9.animeflv.cc/anime/one-piece-tv")},
+                    foreground = colors[3],
+                    background = colors[5],
                 ),
 
-                widget.TextBox(
-                    text = 's4mb4@mars',
-                    font = 'Hack Bold',
-                    foreground = blanco,
+                widget.Net(
+                    font = 'Font Awesome 5 Free',
+                    background = colors[3],
+                    foreground = negro,
+                    interface = 'wlo1',
                     padding = 5,
-                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal)},
-                ),
-
-                widget.Spacer(length=2)
-               
-                ],
+                    format = fa.icons['signal'] + ' {interface}: {down} ↓↑ {up}',
+                     mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn(terminal + " --hold -e ip l")},  
+                ),  
+              
+            ],
             20,
             margin = [0, 0, 0, 0],
             background="#00000000",
@@ -452,6 +538,16 @@ screens = [
     ),
 ]
 
+def extract_ip():
+    st = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:       
+        st.connect(('10.255.255.255', 1))
+        IP = st.getsockname()[0]
+    except Exception:
+        IP = '127.0.0.1'
+    finally:
+        st.close()
+    return IP
 
 # Drag floating layouts.
 mouse = [
@@ -503,7 +599,7 @@ def autostart():
     subprocess.call(path + "autostart.sh")
 
 # Alternative autostart:
-cmd = ["xrandr --dpi 96"]
+# cmd = ["xrandr --dpi 96"]
 
-for x in cmd:
-    os.system(x)
+# for x in cmd:
+#     os.system(x)
