@@ -2,8 +2,8 @@
 # for a list of all available themes
 --theme="OneHalfDark"
 
-# Show line numbers, Git modifications and file header (but no grid)
---style="numbers,changes,header"
+# Show line numbers, Git modifications, grid and file header
+--style="numbers,changes,grid,header"
 
 # Use italic text on the terminal (not supported on all terminals)
 --italic-text=always
