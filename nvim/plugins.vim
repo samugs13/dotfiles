@@ -16,8 +16,12 @@ Plug 'ryanoasis/vim-devicons', "Icons for NERDTree.
 Plug 'kyazdani42/nvim-web-devicons', "Icons for barbar
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight', "Syntax highlighting for NERDTree
 Plug 'joshdick/onedark.vim', "Theme
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} "Highlighting.
-Plug 'onsails/lspkind-nvim', "Lsp icons
+
+"LSP
+Plug 'neovim/nvim-lspconfig', "Configurations for Neovim's built-in language server client.
+Plug 'williamboman/nvim-lsp-installer',
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} "LSP Highlighting.
+Plug 'onsails/lspkind-nvim', "LSP icons
 
 "git
 Plug 'airblade/vim-gitgutter', "Shows a git diff in the sign column.
@@ -30,14 +34,14 @@ Plug 'tpope/vim-commentary', "Comment stuff out.
 Plug 'preservim/nerdtree', "Tree explorer for vim.
 Plug 'ptzz/lf.vim', "File manager.
 Plug 'voldikss/vim-floaterm', "Floating window for lf.
-Plug 'neovim/nvim-lspconfig', "Configurations for Neovim's built-in language server client.
 Plug 'nvim-lua/plenary.nvim', "Lua functions.
 Plug 'nvim-telescope/telescope.nvim', "Fuzzy finder.
 Plug 'github/copilot.vim',
 Plug 'romgrk/barbar.nvim',
 
 "snippets
-Plug 'hrsh7th/cmp-vsnip', "Snippet
-Plug 'hrsh7th/vim-vsnip', "snippets
+Plug 'hrsh7th/cmp-vsnip', 
+Plug 'hrsh7th/vim-vsnip', 
+
 call plug#end()
 

@@ -1,10 +1,10 @@
-" Load list of plugins
+"Load list of plugins
 source /home/s4mb4/.config/nvim/plugins.vim
 
 let mapleader =" "
 set termguicolors
 set hidden
-set number
+set number relativenumber
 
 "Set colorscheme
 syntax on
@@ -41,6 +41,8 @@ require'lspconfig'.cssls.setup{}
 require'lspconfig'.java_language_server.setup{}
 require'lspconfig'.dockerls.setup{}
 require'lspconfig'.terraformls.setup{}
+require'lspconfig'.texlab.setup{}
+require'lspconfig'.vimls.setup{}
 EOF
 
 "CMP setup
@@ -127,6 +129,12 @@ lua << EOF
         capabilities = capabilities
     }    
     require('lspconfig')['terraformls'].setup {
+        capabilities = capabilities
+    }
+    require('lspconfig')['texlab'].setup {
+        capabilities = capabilities
+    }
+    require('lspconfig')['vimls'].setup {
         capabilities = capabilities
     }
 EOF
