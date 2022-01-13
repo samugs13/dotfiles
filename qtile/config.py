@@ -156,15 +156,15 @@ keys = [
 #######################################################################################################
 
 __groups = {
-        1: Group(name=fa.icons['terminal'], layout='monadtall'),
+        1: Group(name=fa.icons['terminal'], layout='bsp'),
         2: Group(name=fa.icons['globe'], layout='monadtall'),
-        3: Group(name=fa.icons['folder-open'], layout='monadtall'),
-        4: Group(name=fa.icons['code'], layout='monadtall'),
+        3: Group(name=fa.icons['folder-open'], layout='monadwide'),
+        4: Group(name=fa.icons['code'], layout='monadwide'),
         5: Group(name=fa.icons['video'], layout='max'),
         6: Group(name=fa.icons['edit'], layout='max'),
         7: Group(name=fa.icons['music'], layout='max'),
         8: Group(name=fa.icons['comment-dots'], layout='max'),
-        9: Group(name=fa.icons['skull-crossbones'], layout='bsp'),
+        9: Group(name=fa.icons['skull-crossbones'], layout='monadwide'),
  }
 
 groups = [__groups[i] for i in __groups]
@@ -202,6 +202,8 @@ layouts = [
 
     layout.MonadTall(**layout_theme),
 
+    layout.MonadWide(**layout_theme),
+    
     layout.Max(),
 
     layout.Bsp(**layout_theme),
@@ -298,6 +300,15 @@ screens = [
 
                 widget.Spacer(
                     length = 2,
+                ),
+
+                widget.Pomodoro(
+                    length_long_break = 25,
+
+                ),
+
+                widget.Spacer(
+                    length=2,
                 ),
 
                 widget.TextBox(
@@ -431,7 +442,6 @@ screens = [
                             (fa.icons['linkedin'], 'brave --new-window https://www.linkedin.com', 'LinkedIn'),
                         ],
                     ),
-
                 ],
                     font = 'Font Awesome 5 Free',
                     fontsize = 16,
@@ -528,7 +538,7 @@ screens = [
                     padding = 5,
                     format = fa.icons['signal'] + ' {interface}: {down} ↓↑ {up}',
                      mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn(terminal + " --hold -e ip l")},  
-                ),  
+                ),
               
             ],
             20,
