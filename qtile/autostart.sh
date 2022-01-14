@@ -9,7 +9,7 @@ function run {
 
 setxkbmap es  # Keyboard layout
 
-#feh --bg-fill /home/s4mb4/.config/qtile/wallpapers/w005.png  # Set wallpaper (pywal does this)
+#feh --bg-fill /home/s4mb4/.config/qtile/settings/wallpapers/w005.png  # Set wallpaper (pywal does this)
 
 #starting utility applications at boot time
 run nm-applet &
@@ -21,7 +21,7 @@ blueberry-tray &
 run volumeicon &
 run variety &
 wal -R	# -R restores the last colorscheme and wallpaper that was in use.
-picom --config $HOME/.config/qtile/scripts/picom.conf &
+picom --config $HOME/.config/qtile/settings/scripts/picom.conf &
 dunst &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 run xautolock -time 10 -locker slock

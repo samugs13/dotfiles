@@ -14,3 +14,4 @@ def extract_ip():
     return IP
 
 ip = extract_ip()
+print(ip)
