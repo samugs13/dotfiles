@@ -72,7 +72,7 @@ primary_widgets = [
                          padding=0,
                          scale=0.7,
                          y_poss=2,
-                         theme_path="/home/s4mb4/.config/qtile/icons/battery_icons_horiz",
+                         theme_path="/home/s4mb4/.config/qtile/settings/icons/battery_icons_horiz",
                          update_interval = 5,
                          background = colors[0]
                 ),
