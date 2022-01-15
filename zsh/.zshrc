@@ -24,7 +24,7 @@ zstyle ':vcs_info:git:*' formats       '%F{#0000ff}(%F{#ffff00}%b%F{#ff6666}%u%F
 zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c)'
 
 # Add path to the prompt
-PROMPT="%{$fg_bold[magenta]%}%(4~|.../%3~|%~) " 
+PROMPT="%{$fg[magenta]%}%(4~|.../%3~|%~) " 
 # Checks if the path is at least 4 elements long %(4~|true|false) and, if true, prints some dots with the last 3 elements (.../%3~), otherwise the full path is printed %~
 
 # Add the arrows to the prompt, which works as follows:
@@ -97,13 +97,11 @@ lfcd () {
 bindkey -s '^f' 'lfcd\n'
 
 # Dotfiles aliases 
-alias az="cp $HOME/.zshrc $HOME/Escritorio/dotfiles/zsh/"
-alias aa="cp $HOME/.config/alacritty/alacritty.yml $HOME/Escritorio/dotfiles/alacritty/"
-alias aq="cp $HOME/.config/qtile/config.py $HOME/Escritorio/dotfiles/qtile/ && cp -r $HOME/.config/qtile/wallpapers $HOME/Escritorio/dotfiles/qtile/ && cp $HOME/.config/qtile/autostart.sh $HOME/Escritorio/dotfiles/qtile/ && cp -r $HOME/.config/qtile/scripts $HOME/Escritorio/dotfiles/qtile/" 
+alias aq="cp $HOME/.config/qtile/config.py $HOME/Escritorio/dotfiles/qtile/ && cp -r $HOME/.config/qtile/settings $HOME/Escritorio/dotfiles/qtile/ && cp $HOME/.config/qtile/autostart.sh $HOME/Escritorio/dotfiles/qtile/" 
 alias an="cp -r $HOME/.config/nvim $HOME/Escritorio/dotfiles/"
 
 # Apply pywal colors to new terminal instances
-(cat ~/.cache/wal/sequences &)
+# (cat ~/.cache/wal/sequences &)
 
 # Load plugins
 source $HOME/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
