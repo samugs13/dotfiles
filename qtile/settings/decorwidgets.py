@@ -37,7 +37,17 @@ altwidgets = [
        fontsize = 15,
        disable_drag = True,
     ),
+
+    widget.Sep(),
     
+    widget.WindowName(
+        padding = 8,
+        max_chars = 90,
+        foreground = onedark[7],
+        font = 'Hack Bold',
+        fontsize = 15,
+    ),
+
     widget.Spacer(length=bar.STRETCH),
     
     widget.Clock(
@@ -45,7 +55,7 @@ altwidgets = [
     foreground=onedark[0],
     format= fa.icons['clock'] + ' %H:%M ' + fa.icons['calendar-alt'] + ' %a, %d de %h de %Y',
     **rect),
-
+     
     widget.Spacer(length=bar.STRETCH),
 
     widget.TextBox(
