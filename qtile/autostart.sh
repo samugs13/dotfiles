@@ -9,7 +9,7 @@ function run {
 
 setxkbmap es  # Keyboard layout
 
-feh --bg-fill /home/s4mb4/.config/qtile/settings/wallpapers/w111.png  # Set wallpaper (pywal does this)
+feh --bg-fill /home/s4mb4/.config/qtile/settings/wallpapers/w003.png  # Set wallpaper (pywal does this)
 
 #starting utility applications at boot time
 run nm-applet &
