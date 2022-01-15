@@ -8,7 +8,7 @@ from libqtile.config import Match
 
 layout_theme = {
     "border_width":3,
-    "border_focus": onedark[4],
+    "border_focus": onedark[5],
     "border_normal": onedark[0],
     "single_border_width": 0,
     "margin":8,
