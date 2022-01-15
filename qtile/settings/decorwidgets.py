@@ -44,11 +44,11 @@ altwidgets = [
     widget.Sep(),
     
     widget.WindowName(
-        padding = 5,
-        max_chars = 27,
+        padding = 7,
+        max_chars = 38,
         foreground = onedark[7],
         font = 'Hack Bold',
-        fontsize = 15,
+        fontsize = 14,
         empty_group_string = 'Desktop'
     ),
 
