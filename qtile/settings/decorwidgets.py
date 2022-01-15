@@ -46,6 +46,7 @@ altwidgets = [
         foreground = onedark[7],
         font = 'Hack Bold',
         fontsize = 15,
+        empty_group_string = 'Desktop'
     ),
 
     widget.Spacer(length=bar.STRETCH),
