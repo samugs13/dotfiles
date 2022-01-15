@@ -178,6 +178,33 @@ altwidgets = [
     widget.Sep(),
 
     widget.Systray(
+        padding = 2,
+    ),
+
+    widget.Spacer(
+        length=5,
+    ),
+
+    widget.WidgetBox(widgets=[
+                    
+        widget.LaunchBar(
+            progs=[
+                (fa.icons['discord'], 'brave --new-window https://www.discord.com', 'Discord'),
+                (fa.icons['github'], 'brave --new-window https://www.github.com', 'Github'),
+                (fa.icons['reddit-alien'], 'brave --new-window https://www.reddit.com', 'Reddit'),
+                (fa.icons['twitch'], 'brave --new-window https://www.twitch.com', 'Twitch'),
+                (fa.icons['youtube'], 'brave --new-window https://www.youtube.com', 'Youtube'),
+                (fa.icons['spotify'], 'spotify', 'Spotify'),
+                (fa.icons['skype'], 'skypeforlinux', 'Skype'),
+            ],
+        ),
+    ],
+        font = 'Font Awesome 5 Free',
+        fontsize = 14,
+        foreground = onedark[7],
+        background = onedark[0],
+        text_closed = fa.icons['pager'],
+        text_open = '|',
     ),
 
     widget.Spacer(
