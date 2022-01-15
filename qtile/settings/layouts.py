@@ -3,15 +3,15 @@
 ################################
 
 from libqtile import layout 
-from .colors import colors
+from .colors import colors, onedark 
 from libqtile.config import Match
 
 layout_theme = {
     "border_width":3,
-    "border_focus": colors[5],
-    "border_normal": colors[0],
+    "border_focus": onedark[4],
+    "border_normal": onedark[0],
     "single_border_width": 0,
-    "margin":7,
+    "margin":8,
 }
 
 layouts = [
