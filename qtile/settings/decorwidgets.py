@@ -28,21 +28,24 @@ altwidgets = [
        font = 'Font Awesome 5 Free Solid',
        active = onedark[4],
        inactive = onedark[7],
-       highlight_method="line",
+       highlight_method="border",
+       borderwidth = 2,
        this_current_screen_border = onedark[4],
        block_highlight_text_color = onedark[7],
        highlight_color = onedark[0],
        center_aligned = True,
        background = onedark[0],
-       fontsize = 15,
+       fontsize = 14,
        disable_drag = True,
+       padding_y = 7,
+       padding_x = 7
     ),
 
     widget.Sep(),
     
     widget.WindowName(
-        padding = 8,
-        max_chars = 90,
+        padding = 5,
+        max_chars = 27,
         foreground = onedark[7],
         font = 'Hack Bold',
         fontsize = 15,
