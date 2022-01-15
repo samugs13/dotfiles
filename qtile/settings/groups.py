@@ -12,11 +12,12 @@ __groups = {
         2: Group(name=fa.icons['globe'], layout='monadtall'),
         3: Group(name=fa.icons['folder-open'], layout='monadwide'),
         4: Group(name=fa.icons['code'], layout='monadtall'),
-        5: Group(name=fa.icons['video'], layout='max'),
-        6: Group(name=fa.icons['edit'], layout='max'),
-        7: Group(name=fa.icons['music'], layout='max'),
-        8: Group(name=fa.icons['comment-dots'], layout='max'),
-        9: Group(name=fa.icons['skull-crossbones'], layout='monadwide'),
+        5: Group(name=fa.icons['desktop'], layout='max'),
+        6: Group(name=fa.icons['video'], layout='max'),
+        7: Group(name=fa.icons['edit'], layout='max'),
+        8: Group(name=fa.icons['music'], layout='max'),
+        9: Group(name=fa.icons['comment-dots'], layout='max'),
+        0: Group(name=fa.icons['skull-crossbones'], layout='monadwide'),
 }
 
 groups = [__groups[i] for i in __groups]
