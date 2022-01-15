@@ -9,8 +9,7 @@ from qtile_extras import widget
 from libqtile import qtile
 
 from .keys import terminal 
-from .colors import onedark, blanco 
-from .scripts import arcobattery
+from .colors import onedark 
 from .scripts import getIP
 from .decorations import rect, redb, greenb, yellowb, purpleb, cyanb
 
@@ -38,7 +37,7 @@ altwidgets = [
        fontsize = 14,
        disable_drag = True,
        padding_y = 7,
-       padding_x = 7
+       padding_x = 3,
     ),
 
     widget.Sep(),
