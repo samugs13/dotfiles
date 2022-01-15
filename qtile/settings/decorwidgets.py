@@ -111,7 +111,7 @@ altwidgets = [
         padding = 8,
         foreground = onedark[7],
         background = onedark[0],
-        **yellowb
+        **greenb
     ),
 
     widget.TextBox(
@@ -157,7 +157,7 @@ altwidgets = [
         padding = 0,
         scale = 0.45,
         background = onedark[0],
-        **greenb
+        **yellowb
     ),
 
     widget.Spacer(
