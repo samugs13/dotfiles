@@ -91,11 +91,6 @@ primary_widgets = [
                     length = 2,
                 ),
 
-                widget.Pomodoro(
-                    length_long_break = 25,
-
-                ),
-
                 widget.Spacer(
                     length=2,
                 ),
@@ -321,5 +316,94 @@ secondary_widgets = [
                 ),
 ]
 
+extra_bottom_widgets = [ 
+                   widget.Spacer(
+                    length = bar.STRETCH,
+                    background = '#00000000',
+                ),
 
+                widget.CurrentLayoutIcon(
+                    foreground = blanco,
+                    padding = 0,
+                    scale = 0.7
+                ),
+
+                widget.CurrentLayout(
+                    foreground = blanco,
+                    padding = 5,
+                ),
+
+                widget.Sep(
+                    padding = 3,
+                    foreground = blanco,
+                ),
+
+                widget.CPU(
+                    font = 'Font Awesome 5 Free',
+                    foreground = blanco,
+                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e htop')},
+                    format = fa.icons['brain'] + ' CPU {load_percent}%',
+                    padding = 5,
+                ),
+
+                widget.Sep(
+                    foreground = blanco,
+                    padding = 3,
+                ),
+
+                widget.ThermalSensor(
+                    font = 'Font Awesome 5 Free',
+                    foreground = blanco,
+                    padding = 5,
+                    fmt = fa.icons['temperature-low'] + ' {}',
+                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' --hold -e sensors')},
+                ),
+
+                widget.Sep(
+                    padding = 3,
+                    foreground = blanco
+                ),
+
+                widget.CheckUpdates(
+                    font = 'Font Awesome 5 Free',
+                    update_interval=20,
+                    foreground = blanco,
+                    colour_have_updates = blanco,
+                    distro = 'Arch_checkupdates',
+                    display_format = fa.icons['sync-alt'] + ' {updates} updates',
+                    no_update_string = fa.icons['sync-alt'] + ' no updates',
+                    padding = 5,
+                    mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn(terminal + " -e sudo pacman -Syu")}
+                ),
+
+                 widget.Sep(
+                    padding = 3,
+                    foreground = blanco
+                ),
+
+                widget.Backlight(
+                   font = 'Font Awesome 5 Free Solid',
+                   backlight_name = 'intel_backlight',
+                   brightness_file = 'brightness',
+                   fmt = fa.icons['sun'] + ' {}',
+                   padding = 5,
+                   foreground = blanco,
+                ),
+
+                widget.Sep(
+                    foreground = blanco,
+                    padding = 3,
+                ),
+
+                widget.Clock(
+                    font = 'Font Awesome 5 Free Solid',
+                    format= fa.icons['calendar-alt'] + ' %d/%m/%y',
+                    foreground = blanco,
+                    padding = 5,
+                    mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn(terminal + " --hold -e cal -n 1")}
+                ),
+
+                widget.Spacer(length = bar.STRETCH),
+                widget.TextBox(),
+]
 

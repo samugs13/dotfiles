@@ -134,7 +134,6 @@ altwidgets = [
     ),
 
     widget.CheckUpdates(
-        font = 'Font Awesome 5 Free',
         update_interval=20,
         foreground = onedark[7],
         colour_have_updates = onedark[7],
