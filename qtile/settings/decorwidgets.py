@@ -23,6 +23,7 @@ widget_defaults = dict(
 extension_defaults = widget_defaults.copy()
 
 altwidgets = [
+
     widget.GroupBox(
        font = 'Font Awesome 5 Free Solid',
        active = onedark[4],
@@ -169,10 +170,6 @@ altwidgets = [
         fmt = '{} '
     ),
     
-    widget.Spacer(
-        length = 5,
-    ),
-
     widget.Sep(),
 
     widget.Systray(
@@ -180,7 +177,7 @@ altwidgets = [
     ),
 
     widget.Spacer(
-        length=5,
+        length = 5,
     ),
 
     widget.WidgetBox(widgets=[
@@ -206,6 +203,6 @@ altwidgets = [
     ),
 
     widget.Spacer(
-        length=5,
+        length=8,
     ),
 ]
