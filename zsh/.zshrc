@@ -100,6 +100,14 @@ bindkey -s '^f' 'lfcd\n'
 alias aq="cp $HOME/.config/qtile/config.py $HOME/Escritorio/dotfiles/qtile/ && cp -r $HOME/.config/qtile/settings $HOME/Escritorio/dotfiles/qtile/ && cp $HOME/.config/qtile/autostart.sh $HOME/Escritorio/dotfiles/qtile/" 
 alias an="cp -r $HOME/.config/nvim $HOME/Escritorio/dotfiles/"
 
+# Docker aliases 
+alias ldi="docker images"
+alias ldc="docker container ls -a"
+alias lda="docker system df"
+alias rmi="docker rmi"
+alias rmc="docker container rm"
+alias dc="docker-compose"
+
 # Apply pywal colors to new terminal instances
 # (cat ~/.cache/wal/sequences &)
 
