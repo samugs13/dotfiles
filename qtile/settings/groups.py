@@ -8,7 +8,7 @@ from libqtile.lazy import lazy
 from .keys import keys, mod
 
 __groups = {
-        1: Group(name=fa.icons['terminal'], layout='bsp'),
+        1: Group(name=fa.icons['terminal'], layout='monadwide'),
         2: Group(name=fa.icons['globe'], layout='monadtall'),
         3: Group(name=fa.icons['folder-open'], layout='monadwide'),
         4: Group(name=fa.icons['code'], layout='monadtall'),
@@ -17,7 +17,7 @@ __groups = {
         7: Group(name=fa.icons['edit'], layout='max'),
         8: Group(name=fa.icons['music'], layout='max'),
         9: Group(name=fa.icons['comment-dots'], layout='max'),
-        0: Group(name=fa.icons['skull-crossbones'], layout='monadwide'),
+        0: Group(name=fa.icons['skull-crossbones'], layout='bsp'),
 }
 
 groups = [__groups[i] for i in __groups]
