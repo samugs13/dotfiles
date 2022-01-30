@@ -23,13 +23,16 @@ keys = [
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
     Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
 
+# Switch between screens
+    
+    Key([mod], "period", lazy.next_screen(), desc="Move screen focus to other screen"),
+
 # Move windows between left/right columns or move up/down in current stack.
 
     Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
     Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
-    Key([mod], "space", lazy.layout.next(), desc="Switch window focus to other pane(s) of stack"),
 
 # Super + function keys
 
@@ -65,7 +68,7 @@ keys = [
         desc="Grow window up",
     ),
 
-    Key([mod, "control"], "r", lazy.layout.normalize(), desc="Reset all window sizes"),
+    Key([mod, "control"], "s", lazy.layout.normalize(), desc="Reset all window sizes"),
 
 # Toggle between split and unsplit sides of stack.
 # Split = all windows displayed | Unsplit = 1 window displayed but still with multiple stack panes
