@@ -21,11 +21,11 @@ keys = [
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
+    Key([mod], "period", lazy.layout.next(), desc="Move window focus to other window"),
 
 # Switch between screens
     
-    Key([mod], "period", lazy.next_screen(), desc="Move screen focus to other screen"),
+    Key([mod], "space", lazy.next_screen(), desc="Move screen focus to other screen"),
 
 # Move windows between left/right columns or move up/down in current stack.
 
