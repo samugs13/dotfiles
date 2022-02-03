@@ -208,6 +208,14 @@ altwidgets = [
 ]
 
 altwidgets2 = [
+    
+    widget.CurrentScreen(
+        padding = 8,
+        active_text = 'A',
+        inactive_text = 'I',
+    ),
+
+    widget.Sep(),
 
     widget.GroupBox(
        font = 'Font Awesome 5 Free Solid',
@@ -380,6 +388,14 @@ altwidgets2 = [
 ]
 
 altwidgets3 = [
+    
+    widget.CurrentScreen(
+        padding = 8,
+        active_text = 'A',
+        inactive_text = 'I',
+    ),
+
+    widget.Sep(),
 
     widget.GroupBox(
        font = 'Font Awesome 5 Free Solid',
@@ -403,36 +419,42 @@ altwidgets3 = [
     
     widget.WindowName(
         padding = 7,
-        max_chars = 200,
         foreground = onedark[7],
         font = 'Hack Bold',
         fontsize = 14,
         empty_group_string = 'Desktop'
     ),
-
-    widget.Spacer(length=bar.STRETCH),
     
-    widget.Clock(
-    font = 'Font Awesome 5 Free',
-    foreground=onedark[0],
-    format= fa.icons['clock'] + ' %H:%M ' + fa.icons['calendar-alt'] + ' %a, %d de %h de %Y',
-    **rect),
-     
-    widget.Spacer(length=bar.STRETCH),
+    widget.Spacer(
+         length = bar.STRETCH
+    ),
+
+    widget.Mpris2(
+        fmt = fa.icons['spotify'] + ' {}',
+        foreground = onedark[0],
+        name='spotify',
+        objname="org.mpris.MediaPlayer2.spotify",
+        display_metadata=['xesam:title', 'xesam:artist'],
+        scroll_chars=None,
+        stop_pause_text=fa.icons['play'],
+        **rect 
+    ),
+
+    widget.Spacer(
+        length = 260,
+    ),
 
     widget.TextBox(
         font = 'Font Awesome 5 Free',
-        text = fa.icons['sun'],
+        text = fa.icons['brain'],
         padding = 8,
         foreground = onedark[7],
         background = onedark[0],
         **redb
     ),
 
-    widget.Backlight(
-        backlight_name = 'intel_backlight',
-        brightness_file = 'brightness',
-        fmt = '{}',
+    widget.CPU(
+        format = 'CPU {load_percent}%',
         padding = 5,
         foreground = onedark[7],
         background = onedark[0],
@@ -444,20 +466,21 @@ altwidgets3 = [
 
     widget.TextBox(
         font = 'Font Awesome 5 Free',
-        text = fa.icons['keyboard'],
+        text = fa.icons['hdd'],
         padding = 8,
         foreground = onedark[7],
         background = onedark[0],
         **purpleb
     ),
 
-    widget.KeyboardLayout(
-        configured_keyboards = ['es','us'],
-        fmt = '{}',
-        background = onedark[0],
+    widget.DF(
+        visible_on_warn = False,
+        format = '{p}: {uf}{m} free',
         padding = 5,
-        foreground = onedark[7], 
-    ), 
+        foreground = onedark[7],
+        background = onedark[0],
+        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' --hold -e df -h')},
+    ),
 
     widget.Spacer(
         length = 5,
@@ -465,15 +488,17 @@ altwidgets3 = [
 
     widget.TextBox(
         font = 'Font Awesome 5 Free',
-        text = fa.icons['user-secret'],
+        text = fa.icons['network-wired'],
         padding = 8,
         foreground = onedark[7],
         background = onedark[0],
         **greenb
     ),
 
-    widget.TextBox(
-        text = ip,
+    widget.Wlan(
+            interface = 'wlo1',
+        font = 'Hack Nerd Font',
+        fmt = '{}',
         padding = 5,
         foreground = onedark[7],
         background = onedark[0],
@@ -485,23 +510,16 @@ altwidgets3 = [
 
     widget.TextBox(
         font = 'Font Awesome 5 Free',
-        text = fa.icons['sync'],
+        text = fa.icons['temperature-low'],
         padding = 8,
         foreground = onedark[7],
         background = onedark[0],
         **cyanb
     ),
 
-    widget.CheckUpdates(
-        update_interval=20,
+    widget.ThermalSensor(
         foreground = onedark[7],
-        colour_have_updates = onedark[7],
-        colour_no_updates = onedark[7],
-        distro = 'Arch_checkupdates',
-        display_format = '{updates} updates',
-        no_update_string = 'updated',
         padding = 5,
-        mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn(terminal + " -e sudo pacman -Syu")},
         background = onedark[0],
     ),
 
@@ -509,36 +527,29 @@ altwidgets3 = [
         length = 5,
     ),
 
-    widget.CurrentLayoutIcon(
+    widget.TextBox(
+        font = 'Font Awesome 5 Free',
+        text = fa.icons['city'],
+        padding = 8,
         foreground = onedark[7],
-        padding = 0,
-        scale = 0.45,
         background = onedark[0],
         **yellowb
     ),
 
-    widget.Spacer(
-        length = 5,
-    ),
-
-    widget.CurrentLayout(
+    widget.OpenWeather(
+        location = 'Madrid',
         foreground = onedark[7],
-        padding = 0,
+        padding = 5,
         background = onedark[0],
-        fmt = '{} '
     ),
     
     widget.Sep(),
-
-    widget.Spacer(
-        length = 5,
-    ),
-
+    
     widget.Systray(
         padding = 2,
     ),
 
     widget.Spacer(
-        length=8,
+        length=5,
     ),
 ]
