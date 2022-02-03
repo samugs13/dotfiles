@@ -189,7 +189,6 @@ altwidgets = [
                 (fa.icons['reddit-alien'], 'brave --new-window https://www.reddit.com', 'Reddit'),
                 (fa.icons['twitch'], 'brave --new-window https://www.twitch.com', 'Twitch'),
                 (fa.icons['youtube'], 'brave --new-window https://www.youtube.com', 'Youtube'),
-                (fa.icons['spotify'], 'spotify', 'Spotify'),
                 (fa.icons['skype'], 'skypeforlinux', 'Skype'),
             ],
         ),
@@ -232,7 +231,7 @@ altwidgets2 = [
        disable_drag = True,
        padding_y = 7,
        padding_x = 3,
-       visible_groups=[fa.icons['terminal'], fa.icons['globe'], fa.icons['folder-open'], fa.icons['code'], fa.icons['desktop']],
+       visible_groups=[fa.icons['terminal'], fa.icons['globe'], fa.icons['folder-open'], fa.icons['code'], fa.icons['tv']],
     ),
 
     widget.Sep(),
@@ -366,10 +365,6 @@ altwidgets2 = [
     
     widget.Sep(),
 
-    widget.Spacer(
-        length = 5,
-    ),
-
     widget.LaunchBar(
         progs=[
             (fa.icons['discord'], 'brave --new-window https://www.discord.com', 'Discord'),
@@ -383,7 +378,7 @@ altwidgets2 = [
     ),
 
     widget.Spacer(
-        length=8,
+        length=5,
     ),
 ]
 
@@ -412,13 +407,14 @@ altwidgets3 = [
        disable_drag = True,
        padding_y = 7,
        padding_x = 3,
-       visible_groups=[fa.icons['video'], fa.icons['edit'], fa.icons['music'], fa.icons['comment-dots'], fa.icons['skull-crossbones']],
+       visible_groups=[fa.icons['video'], fa.icons['edit'], fa.icons['music'], fa.icons['comment-dots'], fa.icons['envelope']],
     ),
 
     widget.Sep(),
     
     widget.WindowName(
         padding = 7,
+        max_chars = 100,
         foreground = onedark[7],
         font = 'Hack Bold',
         fontsize = 14,
@@ -426,7 +422,7 @@ altwidgets3 = [
     ),
     
     widget.Spacer(
-         length = bar.STRETCH
+         length = 5
     ),
 
     widget.Mpris2(
@@ -441,7 +437,7 @@ altwidgets3 = [
     ),
 
     widget.Spacer(
-        length = 260,
+        length = 30,
     ),
 
     widget.TextBox(
@@ -541,6 +537,10 @@ altwidgets3 = [
         foreground = onedark[7],
         padding = 5,
         background = onedark[0],
+    ),
+
+    widget.Spacer(
+        length = 5,
     ),
     
     widget.Sep(),
