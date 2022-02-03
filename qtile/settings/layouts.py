@@ -15,14 +15,11 @@ layout_theme = {
 }
 
 layouts = [
-
     layout.MonadTall(**layout_theme),
 
     layout.MonadWide(**layout_theme),
 
     layout.Max(),
-
-    layout.Bsp(**layout_theme),
 ]
 
 floating_layout = layout.Floating(float_rules=[     
