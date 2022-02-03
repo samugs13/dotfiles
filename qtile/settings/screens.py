@@ -37,5 +37,5 @@ if connected_monitors == 1:
     screens.append(Screen(top=bar.Bar(altwidgets, size=30, background=onedark[0])))
 
 if connected_monitors == 2:
-        screens.append(Screen(top=bar.Bar(altwidgets3, size=30, background=onedark[0]))),
-        screens.append(Screen(top=bar.Bar(altwidgets2, size=30, background=onedark[0])))
+        screens.append(Screen(top=bar.Bar(altwidgets2, size=30, background=onedark[0]))),
+        screens.append(Screen(top=bar.Bar(altwidgets3, size=30, background=onedark[0])))
