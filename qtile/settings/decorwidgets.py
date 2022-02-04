@@ -232,7 +232,7 @@ altwidgets2 = [
        disable_drag = True,
        padding_y = 7,
        padding_x = 3,
-       visible_groups=[fa.icons['terminal'], fa.icons['globe'], fa.icons['folder-open'], fa.icons['code'], fa.icons['tv']],
+       visible_groups=[fa.icons['terminal'], fa.icons['globe'], fa.icons['edit'], fa.icons['code'], fa.icons['tv']],
     ),
 
     widget.Sep(),
@@ -407,7 +407,7 @@ altwidgets3 = [
        disable_drag = True,
        padding_y = 7,
        padding_x = 3,
-       visible_groups=[fa.icons['video'], fa.icons['edit'], fa.icons['music'], fa.icons['comment-dots'], fa.icons['envelope']],
+       visible_groups=[fa.icons['folder-open'], fa.icons['video'], fa.icons['music'], fa.icons['comment-dots'], fa.icons['envelope']],
     ),
 
     widget.Sep(),
