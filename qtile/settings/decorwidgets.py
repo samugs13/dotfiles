@@ -25,7 +25,7 @@ extension_defaults = widget_defaults.copy()
 altwidgets = [
 
     widget.GroupBox(
-       font = 'Font Awesome 5 Free Solid',
+       font = 'Font Awesome 6 Free Solid',
        active = onedark[4],
        inactive = onedark[7],
        highlight_method="border",
@@ -55,7 +55,7 @@ altwidgets = [
     widget.Spacer(length=bar.STRETCH),
     
     widget.Clock(
-    font = 'Font Awesome 5 Free',
+    font = 'Hack Nerd Font',
     foreground=onedark[0],
     format= fa.icons['clock'] + ' %H:%M ' + fa.icons['calendar-alt'] + ' %a, %d de %h de %Y',
     **rect),
@@ -63,7 +63,7 @@ altwidgets = [
     widget.Spacer(length=bar.STRETCH),
 
     widget.TextBox(
-        font = 'Font Awesome 5 Free',
+        font = 'Font Awesome 6 Free',
         text = fa.icons['sun'],
         padding = 8,
         foreground = onedark[7],
@@ -85,7 +85,7 @@ altwidgets = [
     ),
 
     widget.TextBox(
-        font = 'Font Awesome 5 Free',
+        font = 'Font Awesome 6 Free',
         text = fa.icons['keyboard'],
         padding = 8,
         foreground = onedark[7],
@@ -106,7 +106,7 @@ altwidgets = [
     ),
 
     widget.TextBox(
-        font = 'Font Awesome 5 Free',
+        font = 'Font Awesome 6 Free',
         text = fa.icons['user-secret'],
         padding = 8,
         foreground = onedark[7],
@@ -126,8 +126,8 @@ altwidgets = [
     ),
 
     widget.TextBox(
-        font = 'Font Awesome 5 Free',
-        text = fa.icons['sync'],
+        font = 'Font Awesome 6 Free',
+        text = fa.icons['download'],
         padding = 8,
         foreground = onedark[7],
         background = onedark[0],
@@ -194,7 +194,7 @@ altwidgets = [
             ],
         ),
     ],
-        font = 'Font Awesome 5 Free',
+        font = 'Font Awesome 6 Free',
         fontsize = 14,
         foreground = onedark[7],
         background = onedark[0],
@@ -218,7 +218,7 @@ altwidgets2 = [
     widget.Sep(),
 
     widget.GroupBox(
-       font = 'Font Awesome 5 Free Solid',
+       font = 'Font Awesome 6 Free Solid',
        active = onedark[4],
        inactive = onedark[7],
        highlight_method="border",
@@ -249,7 +249,7 @@ altwidgets2 = [
     widget.Spacer(length=bar.STRETCH),
     
     widget.Clock(
-    font = 'Font Awesome 5 Free',
+    font = 'Hack Nerd Font',
     foreground=onedark[0],
     format= fa.icons['clock'] + ' %H:%M ' + fa.icons['calendar-alt'] + ' %a, %d de %h de %Y',
     **rect),
@@ -257,7 +257,7 @@ altwidgets2 = [
     widget.Spacer(length=bar.STRETCH),
 
     widget.TextBox(
-        font = 'Font Awesome 5 Free',
+        font = 'Font Awesome 6 Free',
         text = fa.icons['sun'],
         padding = 8,
         foreground = onedark[7],
@@ -279,7 +279,7 @@ altwidgets2 = [
     ),
 
     widget.TextBox(
-        font = 'Font Awesome 5 Free',
+        font = 'Font Awesome 6 Free',
         text = fa.icons['keyboard'],
         padding = 8,
         foreground = onedark[7],
@@ -300,7 +300,7 @@ altwidgets2 = [
     ),
 
     widget.TextBox(
-        font = 'Font Awesome 5 Free',
+        font = 'Font Awesome 6 Free',
         text = fa.icons['user-secret'],
         padding = 8,
         foreground = onedark[7],
@@ -320,8 +320,8 @@ altwidgets2 = [
     ),
 
     widget.TextBox(
-        font = 'Font Awesome 5 Free',
-        text = fa.icons['sync'],
+        font = 'Font Awesome 6 Free',
+        text = fa.icons['download'],
         padding = 8,
         foreground = onedark[7],
         background = onedark[0],
@@ -393,7 +393,7 @@ altwidgets3 = [
     widget.Sep(),
 
     widget.GroupBox(
-       font = 'Font Awesome 5 Free Solid',
+       font = 'Font Awesome 6 Free Solid',
        active = onedark[4],
        inactive = onedark[7],
        highlight_method="border",
@@ -441,7 +441,7 @@ altwidgets3 = [
     ),
 
     widget.TextBox(
-        font = 'Font Awesome 5 Free',
+        font = 'Font Awesome 6 Free',
         text = fa.icons['brain'],
         padding = 8,
         foreground = onedark[7],
@@ -461,7 +461,7 @@ altwidgets3 = [
     ),
 
     widget.TextBox(
-        font = 'Font Awesome 5 Free',
+        font = 'Font Awesome 6 Free',
         text = fa.icons['hdd'],
         padding = 8,
         foreground = onedark[7],
@@ -483,7 +483,7 @@ altwidgets3 = [
     ),
 
     widget.TextBox(
-        font = 'Font Awesome 5 Free',
+        font = 'Font Awesome 6 Free',
         text = fa.icons['network-wired'],
         padding = 8,
         foreground = onedark[7],
@@ -505,7 +505,7 @@ altwidgets3 = [
     ),
 
     widget.TextBox(
-        font = 'Font Awesome 5 Free',
+        font = 'Font Awesome 6 Free',
         text = fa.icons['temperature-low'],
         padding = 8,
         foreground = onedark[7],
@@ -524,7 +524,7 @@ altwidgets3 = [
     ),
 
     widget.TextBox(
-        font = 'Font Awesome 5 Free',
+        font = 'Font Awesome 6 Free',
         text = fa.icons['city'],
         padding = 8,
         foreground = onedark[7],
