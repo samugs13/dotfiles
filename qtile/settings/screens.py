@@ -7,7 +7,7 @@ from libqtile import bar
 from .colors import colors, onedark
 from .widgets import primary_widgets, secondary_widgets, extra_bottom_widgets
 from .decorwidgets import altwidgets, altwidgets2, altwidgets3 
-
+from .scripts import fontsize
 import subprocess 
 
 screens = [
