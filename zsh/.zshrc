@@ -106,10 +106,18 @@ alias an="cp -r $HOME/.config/nvim $HOME/Escritorio/dotfiles/"
 # Docker aliases 
 alias ldi="docker images"
 alias ldc="docker container ls -a"
-alias lda="docker system df"
+alias ldv="docker volume ls"
+alias ldf="docker system df"
+alias rmva="docker volume ls | awk 'NR>1 {print $2}' | xargs docker volume rm" # Remove all volumes
 alias rmi="docker rmi"
+alias rmia="ldi | awk 'NR>1 {print $3}'| xargs docker rmi 2>/dev/null" # Remove all images
 alias rmc="docker container rm"
+alias rmca="ldc | awk 'NR>1 {print $1}' | xargs docker container rm 2>/dev/null" # Remove all containers
 alias dc="docker-compose"
+
+# Terraform autocompletion
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform
 
 # Apply pywal colors to new terminal instances
 # (cat ~/.cache/wal/sequences &)
