@@ -40,10 +40,10 @@ require'lspconfig'.html.setup{}
 require'lspconfig'.cssls.setup{}
 require'lspconfig'.java_language_server.setup{}
 require'lspconfig'.dockerls.setup{}
-require'lspconfig'.terraformls.setup{}
 require'lspconfig'.texlab.setup{}
-require'lspconfig'.vimls.setup{}
+require'lspconfig'.terraformls.setup{}
 EOF
+autocmd BufWritePre *.tf lua vim.lsp.buf.formatting_sync()
 
 "CMP setup
 lua << EOF
@@ -134,7 +134,15 @@ lua << EOF
     require('lspconfig')['texlab'].setup {
         capabilities = capabilities
     }
-    require('lspconfig')['vimls'].setup {
-        capabilities = capabilities
-    }
+EOF
+
+"TreeSitter setup
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+    highlight = { enable = true },
+    incremental_selection = { enable = true },
+    indent = {
+        enable = true,
+    },
+}
 EOF
