@@ -38,6 +38,7 @@ Plug 'nvim-lua/plenary.nvim', "Lua functions.
 Plug 'nvim-telescope/telescope.nvim', "Fuzzy finder.
 Plug 'github/copilot.vim',
 Plug 'romgrk/barbar.nvim',
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 "snippets
 Plug 'hrsh7th/cmp-vsnip', 
