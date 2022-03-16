@@ -115,7 +115,8 @@ alias rmc="docker container rm"
 alias rmca="ldc | awk 'NR>1 {print $1}' | xargs docker container rm 2>/dev/null" # Remove all containers
 alias dc="docker-compose"
 
-# Terraform autocompletion
+# Terraform settings
+alias tf="terraform"
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
 
