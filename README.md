@@ -1,13 +1,11 @@
 # dotfiles
-<ul>
-  <li>Window Manager -> qtile</li>
-  <li>Shell -> zsh</li>
-  <li>Terminal -> alacritty</li>
-  <li>IDE -> neovim</li>
-  <li>Notifications -> dunst</li>
-  <li>Launcher -> dmenu</li>
-  <li>File Manager -> lf</li>
-</ul>
+**Window Manager ->** qtile
+**Shell ->** zsh
+**Terminal ->** alacritty
+**IDE ->** neovim
+**Notifications ->** dunst
+**Launcher ->** dmenu
+**File Manager ->** lf
 
 ## Qtile - Environment 1
 ![env2](https://user-images.githubusercontent.com/78796980/160302432-31409682-b74b-4c40-9772-473ae5bd00a7.png)
@@ -24,10 +22,8 @@ This environment uses `decorwidgets.py`. When an extra monitor is used, GroupBox
 ![rice4](https://user-images.githubusercontent.com/78796980/160302788-df1eecd6-9118-478d-9db7-e4b3a8e87602.png)
 
 This environment uses pywal to match wallpaper colors with qtile and terminal colors. All the wallpapers are available in `qtile/settings/wallpapers`. To enable this feature:
-
-    - Add the line `wall -R` to autostart.sh to restore the last colorscheme and wallpaper that was in use
-    
-    - Import the script [pywal_colors.py](qtile/settings/scripts/pywal_colors.py) to use wallpaper colors in qtile widgets
+  1. Add the line `wall -R` to autostart.sh to restore the last colorscheme and wallpaper that was in use
+  2. Import the script [pywal_colors.py](qtile/settings/scripts/pywal_colors.py) to use wallpaper colors in qtile widgets
 
 The widgets are the ones at `widgets.py`
 
