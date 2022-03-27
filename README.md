@@ -1,11 +1,13 @@
 # dotfiles
-**Window Manager ->** qtile
-**Shell ->** zsh
-**Terminal ->** alacritty
-**IDE ->** neovim
-**Notifications ->** dunst
-**Launcher ->** dmenu
-**File Manager ->** lf
+<ul>
+  <li>Window Manager: qtile</li>
+  <li>Shell: zsh</li>
+  <li>Terminal emulator: alacritty</li>
+  <li>IDE: neovim</li>
+  <li>Notifications: dunst</li>
+  <li>Launcher: dmenu</li>
+  <li>File Manager: lf</li>
+</ul>
 
 ## Qtile - Environment 1
 ![env2](https://user-images.githubusercontent.com/78796980/160302432-31409682-b74b-4c40-9772-473ae5bd00a7.png)
