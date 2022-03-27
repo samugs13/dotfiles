@@ -14,6 +14,7 @@
 ![env2-2](https://user-images.githubusercontent.com/78796980/160302441-a291dcc6-8d43-43f9-970a-b7ec6b899e71.png)
 
 This environment uses `decorwidgets.py`. When an extra monitor is used, GroupBox is splitted (5 groups in one screen, 5 in the other) and some extra widgets are added in the second screen:
+
 ![monitor](https://user-images.githubusercontent.com/78796980/160303845-bb93488e-e04b-42b7-9424-89d84898176f.png)
 
 ## Qtile - Environment 2
@@ -23,7 +24,9 @@ This environment uses `decorwidgets.py`. When an extra monitor is used, GroupBox
 ![rice4](https://user-images.githubusercontent.com/78796980/160302788-df1eecd6-9118-478d-9db7-e4b3a8e87602.png)
 
 This environment uses pywal to match wallpaper colors with qtile and terminal colors. All the wallpapers are available in `qtile/settings/wallpapers`. To enable this feature:
+
     - Add the line `wall -R` to autostart.sh to restore the last colorscheme and wallpaper that was in use
+    
     - Import the script [pywal_colors.py](qtile/settings/scripts/pywal_colors.py) to use wallpaper colors in qtile widgets
 
 The widgets are the ones at `widgets.py`
@@ -34,7 +37,7 @@ The widgets are the ones at `widgets.py`
 This config is setup as an IDE for multiple languajes.
 
 ## Alacritty - ZSH
-![zsh-alacritty](https://user-images.githubusercontent.com/78796980/160302903-93f560fc-87fb-4f91-a3e6-d60828719380.png)
+![zsh](https://user-images.githubusercontent.com/78796980/160304165-92d263b5-4ec0-45ce-ae2c-777be76e6e75.png)
 
 ### ZSH
 Prompt work as follows:
@@ -44,7 +47,7 @@ Prompt work as follows:
 - Third arrow: did the last command fail to execute? (true=red, false=yellow)
 - Git status indicator
 
-It also has vi mode and a functionality that allows switching directories using LF.
+It also has vi mode and a functionality that allows switching directories using LF (lfcd).
  
 ### Alacritty
 <ul>
