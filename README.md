@@ -24,7 +24,7 @@ This environment uses `decorwidgets.py`. When an extra monitor is used, GroupBox
 ![rice4](https://user-images.githubusercontent.com/78796980/160302788-df1eecd6-9118-478d-9db7-e4b3a8e87602.png)
 
 This environment uses pywal to match wallpaper colors with qtile and terminal colors. All the wallpapers are available in `qtile/settings/wallpapers`. To enable this feature:
-  1. Add the line `wall -R` to autostart.sh to restore the last colorscheme and wallpaper that was in use
+  1. Add the line `wal -R` to autostart.sh to restore the last colorscheme and wallpaper that was in use
   2. Import the script [pywal_colors.py](qtile/settings/scripts/pywal_colors.py) to use wallpaper colors in qtile widgets
 
 The widgets are the ones at `widgets.py`
