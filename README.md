@@ -2,7 +2,7 @@
 <ul>
   <li>Window Manager: qtile</li>
   <li>Shell: zsh</li>
-  <li>Terminal emulator: alacritty</li>
+  <li>Terminal emulator: alacritty / kitty</li>
   <li>IDE: neovim</li>
   <li>Notifications: dunst</li>
   <li>Launcher: dmenu</li>
@@ -34,20 +34,21 @@ The widgets are the ones at `widgets.py`
 
 This config is setup as an IDE for multiple languajes.
 
-## Alacritty - ZSH
+## ZSH - Kitty/Alacritty
 ![zsh](https://user-images.githubusercontent.com/78796980/160304165-92d263b5-4ec0-45ce-ae2c-777be76e6e75.png)
 
 ### ZSH
 Prompt work as follows:
 - Working directory path (it is shortened if it is at least 4 elements long)
 - First arrow: is this a root shell? (true=red, false=blue)
-- Second arrow: are there any running background jobs? (true=cyan, false=green)
-- Third arrow: did the last command fail to execute? (true=red, false=yellow)
+- Second arrow: are there any running background jobs? (true=red, false=cyan)
+- Third arrow: did the last command fail to execute? (true=red, false=green)
 - Git status indicator
 
 It also has vi mode and a functionality that allows switching directories using LF (lfcd).
  
-### Alacritty
+### Kitty/Alacritty
+Both configs look the same. 
 <ul>
   <li>Colorscheme: OneDark</li>
   <li>Font: Hack Nerd Font</li>
