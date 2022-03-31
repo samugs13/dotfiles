@@ -20,7 +20,7 @@ precmd() {
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' unstagedstr ' ●' #changes not added 
 zstyle ':vcs_info:*' stagedstr ' ✚' #added changes but not commited
-zstyle ':vcs_info:git:*' formats       '%F{#0000ff}(%F{#ffff00}%b%F{#ff6666}%u%F{#00ff99}%c%F{#0000ff})'
+zstyle ':vcs_info:git:*' formats       '%F{#61afef}(%F{#e5c07b}%b%F{#e06c75}%u%F{#98c379}%c%F{#61afef})'
 zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c)'
 
 # Add path to the prompt
@@ -29,9 +29,9 @@ PROMPT="%{$fg[magenta]%}%(4~|.../%3~|%~) "
 
 # Add the arrows to the prompt, which works as follows:
 # First arrow: is this a root shell? (true=red, false=blue)
-# Second arrow: are there any running background jobs? (true=cyan, false=green)
-# Third arrow: did the last command fail to execute? (true=red, false=yellow)
-PROMPT+="%{$fg_bold[blue]%}%(! %{$fg_bold[red]%} )❱%{$fg_bold[cyan]%}%(1j %{$fg_bold[green]%} )❱%{$fg_bold[yellow]%}%(?  %{$fg_bold[red]%})❱%{$reset_color%} "
+# Second arrow: are there any running background jobs? (true=red, false=cyan)
+# Third arrow: did the last command fail to execute? (true=red, false=green)
+PROMPT+="%{$fg_bold[blue]%}%(! %{$fg_bold[red]%} )❱%{$fg_bold[cyan]%}%(1j %{$fg_bold[red]%} )❱%{$fg_bold[green]%}%(?  %{$fg_bold[red]%})❱%{$reset_color%} "
 
 # Show git info
 RPROMPT=\$vcs_info_msg_0_
@@ -114,6 +114,10 @@ alias rmia="ldi | awk 'NR>1 {print $3}'| xargs docker rmi 2>/dev/null" # Remove 
 alias rmc="docker container rm"
 alias rmca="ldc | awk 'NR>1 {print $1}' | xargs docker container rm 2>/dev/null" # Remove all containers
 alias dc="docker-compose"
+
+# Kitty kittens aliases
+alias ki="kitty +kitten icat"
+alias kssh="kitty +kitten ssh"
 
 # Terraform settings
 alias tf="terraform"
