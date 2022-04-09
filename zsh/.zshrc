@@ -1,14 +1,16 @@
+SHELL=$(which zsh || echo '/bin/zsh')
+
 # Enable colors and change prompt:
 autoload -U colors && colors # Load colors
 
 # Autoload info function
 autoload -Uz vcs_info
 
-# Enable substitution in the prompt.
-setopt prompt_subst
-
-# Automatically cd into typed directory.
-setopt autocd 
+setopt prompt_subst # Enable substitution in the prompt.
+setopt autocd  # Automatically cd into typed directory.
+setopt AUTO_PUSHD # Make cd push the old directory onto the directory stack.
+setopt notify # Report the status of background jobs immediately
+setopt GLOB_DOTS # Do not require a leading ‘.’ in a filename to be matched explicitly.
 
 # Run vcs_info just before a prompt is displayed (precmd)
 zstyle ':vcs_info:*' enable git svn
@@ -141,8 +143,6 @@ source $HOME/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
-
-setopt GLOB_DOTS
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -311,8 +311,8 @@ ex ()
 
 [[ -f ~/.zshrc-personal ]] && . ~/.zshrc-personal
 
-#figlet s4mb4
+#figlet s4mb4 | lolcat
 
-# reporting tools
+#reporting tools
 #neofetch
-#ufetch
+#pfetch
