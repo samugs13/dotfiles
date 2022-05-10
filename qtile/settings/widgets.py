@@ -26,7 +26,7 @@ primary_widgets = [
                 ),
 
                 widget.TextBox(
-                    font = 'Font Awesome 5 Free',
+                    font = 'Font Awesome 6 Free',
                     text = fa.icons["python"],
                     background = colors[0],
                     foreground = blanco,
@@ -49,7 +49,7 @@ primary_widgets = [
                 ),
 
                 widget.GroupBox(
-                   font = 'Font Awesome 5 Free Solid',
+                   font = 'Font Awesome 6 Free Solid',
                    active = colors[3],
                    inactive = colors[7],
                    highlight_method="block",
@@ -96,7 +96,7 @@ primary_widgets = [
                 ),
 
                 widget.TextBox(
-                    font = 'Font Awesome 5 Free',
+                    font = 'Font Awesome 6 Free',
                     fontsize = 17,
                     text = fa.icons['sign-out-alt'],
                     foreground=blanco,
@@ -108,7 +108,7 @@ primary_widgets = [
 
 secondary_widgets = [
                 widget.Clock(
-                    font = 'Font Awesome 5 Free',
+                    font = 'Font Awesome 6 Free',
                     format= fa.icons['calendar-alt'] + ' %a, %d de %h de %Y',
                     padding = 7,
                     foreground = negro,
@@ -158,7 +158,7 @@ secondary_widgets = [
                 ),
                 
                 widget.CheckUpdates(
-                    font = 'Font Awesome 5 Free',
+                    font = 'Font Awesome 6 Free',
                     update_interval=20,
                     foreground = negro,
                     colour_have_updates = negro,
@@ -218,7 +218,7 @@ secondary_widgets = [
                         ],
                     ),
                 ],
-                    font = 'Font Awesome 5 Free',
+                    font = 'Font Awesome 6 Free',
                     fontsize = 16,
                     foreground = blanco,
                     text_closed = fa.icons['dragon'],
@@ -236,7 +236,7 @@ secondary_widgets = [
                 ),
 
                 widget.Backlight(
-                   font = 'Font Awesome 5 Free',
+                   font = 'Font Awesome 6 Free',
                    backlight_name = 'intel_backlight',
                    brightness_file = 'brightness',
                    fmt = fa.icons['sun'] + ' {}',
@@ -254,7 +254,7 @@ secondary_widgets = [
                 ),
 
                 widget.ThermalSensor(
-                    font = 'Font Awesome 5 Free',
+                    font = 'Font Awesome 6 Free',
                     foreground = negro,
                     padding = 5,
                     fmt = fa.icons['temperature-low'] + ' {}',
@@ -271,7 +271,7 @@ secondary_widgets = [
                 ),
 
                 widget.CPU(
-                    font = 'Font Awesome 5 Free',
+                    font = 'Font Awesome 6 Free',
                     foreground = negro,
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e htop')},
                     format = fa.icons['brain'] + ' CPU {load_percent}%',
@@ -289,7 +289,7 @@ secondary_widgets = [
 
                 widget.DF(
                     visible_on_warn = False,
-                    font = 'Font Awesome 5 Free',
+                    font = 'Font Awesome 6 Free',
                     fmt = fa.icons['hdd'] + ' {}',
                     foreground = negro,
                     background = colors[5],
@@ -306,7 +306,7 @@ secondary_widgets = [
                 ),
 
                 widget.Net(
-                    font = 'Font Awesome 5 Free',
+                    font = 'Font Awesome 6 Free',
                     background = colors[3],
                     foreground = negro,
                     interface = 'wlo1',
@@ -339,7 +339,7 @@ extra_bottom_widgets = [
                 ),
 
                 widget.CPU(
-                    font = 'Font Awesome 5 Free',
+                    font = 'Font Awesome 6 Free',
                     foreground = blanco,
                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e htop')},
                     format = fa.icons['brain'] + ' CPU {load_percent}%',
@@ -352,7 +352,7 @@ extra_bottom_widgets = [
                 ),
 
                 widget.ThermalSensor(
-                    font = 'Font Awesome 5 Free',
+                    font = 'Font Awesome 6 Free',
                     foreground = blanco,
                     padding = 5,
                     fmt = fa.icons['temperature-low'] + ' {}',
@@ -365,7 +365,7 @@ extra_bottom_widgets = [
                 ),
 
                 widget.CheckUpdates(
-                    font = 'Font Awesome 5 Free',
+                    font = 'Font Awesome 6 Free',
                     update_interval=20,
                     foreground = blanco,
                     colour_have_updates = blanco,
@@ -382,7 +382,7 @@ extra_bottom_widgets = [
                 ),
 
                 widget.Backlight(
-                   font = 'Font Awesome 5 Free Solid',
+                   font = 'Font Awesome 6 Free Solid',
                    backlight_name = 'intel_backlight',
                    brightness_file = 'brightness',
                    fmt = fa.icons['sun'] + ' {}',
@@ -396,7 +396,7 @@ extra_bottom_widgets = [
                 ),
 
                 widget.Clock(
-                    font = 'Font Awesome 5 Free Solid',
+                    font = 'Font Awesome 6 Free Solid',
                     format= fa.icons['calendar-alt'] + ' %d/%m/%y',
                     foreground = blanco,
                     padding = 5,
