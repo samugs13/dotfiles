@@ -3,31 +3,24 @@ SHELL=$(which zsh || echo '/bin/zsh')
 # Enable colors and change prompt:
 autoload -U colors && colors # Load colors
 
-# Autoload info function
-autoload -Uz vcs_info
-
 setopt prompt_subst # Enable substitution in the prompt.
 setopt autocd  # Automatically cd into typed directory.
 setopt AUTO_PUSHD # Make cd push the old directory onto the directory stack.
 setopt notify # Report the status of background jobs immediately
 setopt GLOB_DOTS # Do not require a leading ‘.’ in a filename to be matched explicitly.
 
-# Run vcs_info just before a prompt is displayed (precmd)
-zstyle ':vcs_info:*' enable git svn
-precmd() {
-    vcs_info
-}
+# Path icon in the prompt 
+# zsh_prompt_path_indicator() {
+#     if [[ "$PWD" == "$HOME" ]];then
+#         echo " "
+#     else
+#         echo "  "
+#     fi
+# }
 
-# Format the vcs_info_msg_0_ variable
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' unstagedstr ' ●' #changes not added 
-zstyle ':vcs_info:*' stagedstr ' ✚' #added changes but not commited
-zstyle ':vcs_info:git:*' formats       '%F{#61afef}(%F{#e5c07b}%b%F{#e06c75}%u%F{#98c379}%c%F{#61afef})'
-zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c)'
-
-# Add path to the prompt
-PROMPT="%{$fg[magenta]%}%(4~|.../%3~|%~) " 
-# Checks if the path is at least 4 elements long %(4~|true|false) and, if true, prints some dots with the last 3 elements (.../%3~), otherwise the full path is printed %~
+# Set the prompt
+# PROMPT=$(zsh_prompt_path_indicator)
+PROMPT="%{$fg[magenta]%}%(4~|.../%3~|%~) " # Checks if the path is at least 4 elements long %(4~|true|false) and, if true, prints some dots with the last 3 elements (.../%3~), otherwise the full path is printed %~
 
 # Add the arrows to the prompt, which works as follows:
 # First arrow: is this a root shell? (true=red, false=blue)
@@ -35,8 +28,14 @@ PROMPT="%{$fg[magenta]%}%(4~|.../%3~|%~) "
 # Third arrow: did the last command fail to execute? (true=red, false=green)
 PROMPT+="%{$fg_bold[blue]%}%(! %{$fg_bold[red]%} )❱%{$fg_bold[cyan]%}%(1j %{$fg_bold[red]%} )❱%{$fg_bold[green]%}%(?  %{$fg_bold[red]%})❱%{$reset_color%} "
 
+# zsh-git-prompt config (https://github.com/starcraftman/zsh-git-prompt)
+source $HOME/.config/zsh/zsh-git-prompt/zshrc.sh
+
 # Show git info
-RPROMPT=\$vcs_info_msg_0_
+export ZSH_THEME_GIT_PROMPT_CACHE=1 
+export ZSH_GIT_PROMPT_SHOW_UPSTREAM=1 
+export ZSH_GIT_PROMPT_SHOW_UPSTREAM=2
+RPROMPT=\$(git_super_status)
 
 # Define history
 HISTSIZE=10000000
@@ -311,6 +310,7 @@ ex ()
 
 [[ -f ~/.zshrc-personal ]] && . ~/.zshrc-personal
 
+#banner
 #figlet s4mb4 | lolcat
 
 #reporting tools
