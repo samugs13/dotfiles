@@ -171,6 +171,35 @@ altwidgets = [
     ),
     
     widget.Sep(),
+    
+    # widget.Spacer(
+    #     length = 5,
+    # ),
+
+    # widget.ALSAWidget(
+    #      mode = 'both',
+    #      theme_path = "/usr/share/icons/Papirus"
+    # ),
+
+    # widget.WiFiIcon(
+    #     interface = 'wlo1',
+    #     inactive_colour = onedark[7],
+    #     fontsize = 11,
+    # ),
+
+    widget.Spacer(
+        length = 5,
+    ),
+
+    widget.UPowerWidget(
+        padding = 2,
+        border_charge_colour = onedark[4],
+        border_colour = onedark[7],
+        border_critical_colour = onedark[1],
+        fill_low = onedark[3],
+        percentage_critical = 0.2,
+        percentage_low = 0.3,
+    ),
 
     widget.Systray(
         padding = 2,
@@ -544,7 +573,21 @@ altwidgets3 = [
     ),
     
     widget.Sep(),
-    
+   
+    widget.Spacer(
+        length = 5,
+    ),
+
+    widget.UPowerWidget(
+        padding = 2,
+        border_charge_colour = onedark[4],
+        border_colour = onedark[7],
+        border_critical_colour = onedark[1],
+        fill_low = onedark[3],
+        percentage_critical = 0.2,
+        percentage_low = 0.3,
+    ),
+
     widget.Systray(
         padding = 2,
     ),

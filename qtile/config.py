@@ -1,5 +1,4 @@
 from typing import List
-
 from libqtile import hook
 import os
 import subprocess

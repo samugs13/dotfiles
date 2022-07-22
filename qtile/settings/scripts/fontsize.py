@@ -7,8 +7,8 @@ from shutil import move, copymode
 from os import fdopen, remove 
 
 home = os.environ['HOME']
-temp_path = "%s/.config/alacritty.yml" % home 
-file_path = "%s/.config/alacritty/alacritty.yml" % home 
+alacritty_temp_path = "%s/.config/alacritty.yml" % home 
+alacritty_file_path = "%s/.config/alacritty/alacritty.yml" % home 
 
 connected_monitors = sp.run(
     "xrandr | grep 'connected' | cut -d ' ' -f 2",
@@ -31,7 +31,6 @@ def replace(file_path, pattern, subst):
     move(temp_path, file_path)
 
 if connected_monitors == 1:
-    replace(file_path, "size: 14.0", "size: 12.0")
-
+    replace(alacritty_file_path, "size: 14.0", "size: 12.0")
 if connected_monitors == 2:
-    replace(file_path, "size: 12.0", "size: 14.0")
+    replace(alacritty_file_path, "size: 12.0", "size: 14.0")
