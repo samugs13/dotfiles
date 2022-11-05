@@ -113,6 +113,7 @@ keys = [
     Key([mod], "n", lazy.spawn("brave --new-window https://www.netflix.com/browse")),
     Key([mod], "o", lazy.spawn("okular")),
     Key([mod], "s", lazy.spawn("spotify")),
+    Key([mod], "t", lazy.spawn("brave --new-window https://web.telegram.org/")),
     Key([mod], "w", lazy.spawn("brave --new-window https://web.whatsapp.com/")),
     Key([mod], "x", lazy.spawn("slock")),
     Key([mod], "z", lazy.spawn(os.environ["HOME"] + "/Escritorio/scripts/dmenu-powersettings.sh")),
