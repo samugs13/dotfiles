@@ -110,6 +110,7 @@ keys = [
     Key([mod], "F5", lazy.spawn(os.environ["HOME"] + "/Escritorio/scripts/dmenu-audiosettings.sh")),
     Key([mod], "b", lazy.spawn("brave --new-window")),
     Key([mod], "d", lazy.spawn("dolphin")),
+    Key([mod], "j", lazy.spawn("jopin")),
     Key([mod], "n", lazy.spawn("brave --new-window https://www.netflix.com/browse")),
     Key([mod], "o", lazy.spawn("okular")),
     Key([mod], "s", lazy.spawn("spotify")),
