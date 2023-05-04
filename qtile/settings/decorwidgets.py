@@ -153,7 +153,7 @@ altwidgets = [
 
     widget.CurrentLayoutIcon(
         foreground = onedark[7],
-        padding = 0,
+        padding = 8,
         scale = 0.45,
         background = onedark[0],
         **yellowb
