@@ -230,11 +230,12 @@ globalkeys = gears.table.join(
     awful.key({ modkey,}, "Escape", awful.tag.history.restore, {description = "go back", group = "tag"}),
     
     -- Layout manipulation
-    awful.key({ modkey,}, "Tab", function () awful.layout.inc( 1) end, {description = "select next", group = "layout"}),
+    awful.key({ modkey,}, "Tab", function () awful.layout.inc( 1) end, {description = "select next layout", group = "layout"}),
     awful.key({ modkey, "Shift" }, "j", function () awful.client.swap.byidx(  1)  end, {description = "swap with next client by index", group = "layout"}),
     awful.key({ modkey, "Shift" }, "k", function () awful.client.swap.byidx( -1)    end, {description = "swap with previous client by index", group = "layout"}),
-    awful.key({ modkey,}, "j", function () awful.client.focus.byidx( 1) end, {description = "focus next by index", group = "layout"}),
-    awful.key({ modkey,}, "k", function () awful.client.focus.byidx(-1) end, {description = "focus previous by index", group = "layout"}),
+    awful.key({ modkey,}, "j", function () awful.client.focus.byidx( 1) end, {description = "focus next client by index", group = "layout"}),
+    awful.key({ modkey,}, "k", function () awful.client.focus.byidx(-1) end, {description = "focus previous client by index", group = "layout"}),
+    awful.key({ modkey,}, "space", function () awful.client.focus.byidx(1) end, {description = "focus next client by index", group = "layout"}),
     awful.key({ modkey,}, "l", function () awful.tag.incmwfact( 0.05) end, {description = "increase master width factor", group = "layout"}),
     awful.key({ modkey,}, "h", function () awful.tag.incmwfact(-0.05) end, {description = "decrease master width factor", group = "layout"}),
 
@@ -269,6 +270,7 @@ clientkeys = gears.table.join(
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle, {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end, {description = "move to master", group = "client"}),
     awful.key({ modkey,}, "t", function (c) c.ontop = not c.ontop end, {description = "toggle keep on top", group = "client"}),
+    awful.key({ modkey,}, "e", function (c) c.sticky = not c.sticky end, {description = "toggle sticky", group = "client"}),
     awful.key({ modkey,}, "n", function (c) c.minimized = true end, {description = "minimize", group = "client"}),
     awful.key({ modkey,}, "m",function (c) c.maximized = not c.maximized c:raise() end , {description = "(un)maximize", group = "client"}),
     awful.key({ modkey, "Control" }, "m", function (c) c.maximized_vertical = not c.maximized_vertical c:raise() end, {description = "(un)maximize vertically", group = "client"}),
