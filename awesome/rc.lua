@@ -46,7 +46,8 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+beautiful.init("/home/s4mb4/.config/awesome/themes/mynord/mynord.lua")
+-- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
@@ -95,12 +96,7 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = myma
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
--- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
-
 -- {{{ Wibar
--- Create a textclock widget
-mytextclock = wibox.widget.textclock()
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -156,10 +152,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "TER", "WWW", "NOTES", "CODE", "WATCH", "FILES", "VIDEO", "MUSIC", "TEXT" }, s, awful.layout.layouts[1])
-
-    -- Create a promptbox for each screen
-    s.mypromptbox = awful.widget.prompt()
+    awful.tag({ "", "", "", "", "", "", "", "" }, s, awful.layout.layouts[1])
 
     -- Create an imagebox widget which will contain an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
@@ -169,39 +162,149 @@ awful.screen.connect_for_each_screen(function(s)
                            awful.button({ }, 3, function () awful.layout.inc(-1) end),
                            awful.button({ }, 4, function () awful.layout.inc( 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
+    
+    local separator = wibox.widget.textbox(" ")
+
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
-        buttons = taglist_buttons
+        buttons = taglist_buttons,
+         style   = {
+            shape = gears.shape.circle,
+            fg_occupied = "#8fbcbb",
+            bg_focus = "#8fbcbb",
+            fg_empty = "#e5e9f0"
+            
+        },
+    }
+
+    -- Keyboard map indicator and switcher
+    local mykeyboardlayout = wibox.widget {
+    {
+        awful.widget.keyboardlayout(),
+        widget = wibox.container.margin,
+    },
+    bg         = gears.color.transparent,
+    shape      = gears.shape.rounded_rect,
+    fg         = "#ffffff",
+    shape_clip = true,
+    widget     = wibox.container.background,
+    }
+
+
+    -- Create systray widget
+    local round_textclock = wibox.widget {
+    {
+        wibox.widget.textclock(),
+        left   = 10,
+        top    = 2,
+        bottom = 2,
+        right  = 10,
+        widget = wibox.container.margin,
+    },
+    bg         = "#282c34",
+    shape      = gears.shape.rounded_rect,
+    shape_border_width = 4,
+    shape_border_color = '#ebcb8b',
+    shape_clip = true,
+    widget     = wibox.container.background,
+    }
+
+    -- Create systray widget
+    local round_systray = wibox.widget {
+    {
+        wibox.widget.systray(),
+        left   = 10,
+        top    = 4,
+        bottom = 4,
+        right  = 10,
+        widget = wibox.container.margin,
+    },
+    bg         = "#282c34",
+    shape      = gears.shape.rounded_rect,
+    shape_clip = true,
+    shape_border_width = 4,
+    shape_border_color = '#a3be8c',
+    widget     = wibox.container.background,
     }
 
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist {
-        screen  = s,
-        filter  = awful.widget.tasklist.filter.currenttags,
-        buttons = tasklist_buttons
+      screen   = s,
+      filter   = awful.widget.tasklist.filter.currenttags,
+      buttons  = tasklist_buttons,
+      style    = {
+          shape_border_width = 2,
+          shape_border_color = '#81a1c1',
+          shape  = gears.shape.rounded_bar,
+      },
+      layout   = {
+          spacing = 10,
+          spacing_widget = {
+              {
+                  forced_width = 5,
+                  shape        = gears.shape.circle,
+                  widget       = wibox.widget.separator
+              },
+              valign = 'center',
+              halign = 'center',
+              widget = wibox.container.place,
+          },
+          layout  = wibox.layout.flex.horizontal
+      },
+      widget_template = {
+          {
+              {
+                  {
+                      {
+                          id     = 'icon_role',
+                          widget = wibox.widget.imagebox,
+                      },
+                      margins = 2,
+                      widget  = wibox.container.margin,
+                  },
+                  {
+                      id     = 'text_role',
+                      widget = wibox.widget.textbox,
+                  },
+                  layout = wibox.layout.fixed.horizontal,
+              },
+              left  = 10,
+              right = 10,
+              widget = wibox.container.margin
+          },
+          id     = 'background_role',
+          widget = wibox.container.background,
+      },
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.mywibox = awful.wibar({ 
+        position = "top", 
+        screen = s,
+        bg = gears.color.transparent,
+        border_width = 5
+    })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
             s.mytaglist,
-            s.mypromptbox,
-        },
+            separator
+        }, 
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
-            wibox.widget.systray(),
-            mytextclock,
+            round_systray,
+            separator,
+            round_textclock,
+            separator,
             s.mylayoutbox,
+            separator
         },
     }
 end)
@@ -394,11 +497,6 @@ awful.rules.rules = {
         }
       }, properties = { floating = true }},
 
-    -- Add titlebars to normal clients and dialogs
-    { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
-    },
-
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },
@@ -418,46 +516,6 @@ client.connect_signal("manage", function (c)
         -- Prevent clients from being unreachable after screen count changes.
         awful.placement.no_offscreen(c)
     end
-end)
-
--- Add a titlebar if titlebars_enabled is set to true in the rules.
-client.connect_signal("request::titlebars", function(c)
-    -- buttons for the titlebar
-    local buttons = gears.table.join(
-        awful.button({ }, 1, function()
-            c:emit_signal("request::activate", "titlebar", {raise = true})
-            awful.mouse.client.move(c)
-        end),
-        awful.button({ }, 3, function()
-            c:emit_signal("request::activate", "titlebar", {raise = true})
-            awful.mouse.client.resize(c)
-        end)
-    )
-
-    awful.titlebar(c) : setup {
-        { -- Left
-            awful.titlebar.widget.iconwidget(c),
-            buttons = buttons,
-            layout  = wibox.layout.fixed.horizontal
-        },
-        { -- Middle
-            { -- Title
-                align  = "center",
-                widget = awful.titlebar.widget.titlewidget(c)
-            },
-            buttons = buttons,
-            layout  = wibox.layout.flex.horizontal
-        },
-        { -- Right
-            awful.titlebar.widget.floatingbutton (c),
-            awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.ontopbutton    (c),
-            awful.titlebar.widget.closebutton    (c),
-            layout = wibox.layout.fixed.horizontal()
-        },
-        layout = wibox.layout.align.horizontal
-    }
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
