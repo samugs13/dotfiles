@@ -11,7 +11,7 @@ local themes_path = gfs.get_themes_dir()
 
 local theme = {}
 
-theme.font          = "Hack Nerd Font 10"
+theme.font          = "Hack Nerd Font 12"
 theme.taglist_font  = "Font Awesome 6 Free Solid 12"
 theme.wallpaper     = "/home/s4mb4/.config/awesome/themes/mynord/wallpapers/wpp2.png"
 theme.tasklist_disable_icon = false
