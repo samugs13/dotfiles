@@ -179,21 +179,7 @@ awful.screen.connect_for_each_screen(function(s)
         },
     }
 
-    -- Keyboard map indicator and switcher
-    local mykeyboardlayout = wibox.widget {
-    {
-        awful.widget.keyboardlayout(),
-        widget = wibox.container.margin,
-    },
-    bg         = gears.color.transparent,
-    shape      = gears.shape.rounded_rect,
-    fg         = "#ffffff",
-    shape_clip = true,
-    widget     = wibox.container.background,
-    }
-
-
-    -- Create systray widget
+    -- Create textclock widget
     local round_textclock = wibox.widget {
     {
         wibox.widget.textclock(),
