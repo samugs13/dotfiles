@@ -448,11 +448,15 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
-                     placement = awful.placement.no_overlap+awful.placement.no_offscreen
+                     placement = awful.placement.no_overlap+awful.placement.no_offscreen,
+                     maximized_vertical   = false,
+                     maximized_horizontal = false,
+                     floating = false,
+                     maximized = false
      }
     },
 
-    -- Floating clients.
+  -- Floating clients.
     { rule_any = {
         instance = {
           "DTA",  -- Firefox addon DownThemAll.

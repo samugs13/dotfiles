@@ -13,7 +13,7 @@ local theme = {}
 
 theme.font          = "Hack Nerd Font 12"
 theme.taglist_font  = "Font Awesome 6 Free Solid 12"
-theme.wallpaper     = "/home/s4mb4/.config/awesome/themes/mynord/wallpapers/wpp2.png"
+theme.wallpaper     = "/home/s4mb4/.config/awesome/themes/mynord/wallpapers/wpp1.png"
 theme.tasklist_disable_icon = false
 
 theme.bg_normal     = "#282c34"
@@ -75,7 +75,7 @@ naughty.config.defaults.border_width = 2
 naughty.config.defaults.border_color = "#a3be8c"
 naughty.config.defaults.opacity = 0.9
 naughty.config.defaults.position = 'top_middle'
-naughty.config.defaults.spacing = '30'
+naughty.config.defaults.spacing = dpi(30)
 naughty.config.defaults.shape = function(cr, w, h)
     gears.shape.rounded_rect(cr, w, h, dpi(6))
 end
