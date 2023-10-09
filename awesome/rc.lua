@@ -172,10 +172,10 @@ awful.screen.connect_for_each_screen(function(s)
         buttons = taglist_buttons,
          style   = {
             shape = gears.shape.circle,
-            fg_occupied = "#8fbcbb",
-            bg_focus = "#8fbcbb",
-            fg_empty = "#e5e9f0"
-            
+            fg_occupied = beautiful.cyan,
+            bg_focus = beautiful.cyan,
+            fg_focus = beautiful.bg_normal,
+            fg_empty = beautiful.fg_normal
         },
     }
 
@@ -189,10 +189,10 @@ awful.screen.connect_for_each_screen(function(s)
         right  = 10,
         widget = wibox.container.margin,
     },
-    bg         = "#282c34",
+    bg         = beautiful.bg_normal,
     shape      = gears.shape.rounded_rect,
     shape_border_width = 4,
-    shape_border_color = '#ebcb8b',
+    shape_border_color = beautiful.yellow,
     shape_clip = true,
     widget     = wibox.container.background,
     }
@@ -211,7 +211,7 @@ awful.screen.connect_for_each_screen(function(s)
     shape      = gears.shape.rounded_rect,
     shape_clip = true,
     shape_border_width = 4,
-    shape_border_color = '#a3be8c',
+    shape_border_color = beautiful.red,
     widget     = wibox.container.background,
     }
 
@@ -222,7 +222,7 @@ awful.screen.connect_for_each_screen(function(s)
       buttons  = tasklist_buttons,
       style    = {
           shape_border_width = 2,
-          shape_border_color = '#81a1c1',
+          shape_border_color = beautiful.blue,
           shape  = gears.shape.rounded_bar,
       },
       layout   = {
@@ -284,7 +284,7 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
+            separator,
             round_systray,
             separator,
             round_textclock,
@@ -511,7 +511,9 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
--- }}}
+client.connect_signal("property::maximized", function (c)
+    c.border_width = c.maximized and 0 or beautiful.border_width
+end)
 
 -- Autostart applications
 awful.spawn.with_shell("~/.config/awesome/autostart.sh")
