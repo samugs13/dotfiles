@@ -16,5 +16,4 @@ blueberry-tray
 run cbatticon -i notification   # Battery systray icon
 run volumeicon
 picom --config $HOME/.config/qtile/settings/scripts/picom.conf
-dunst
 run xautolock -time 10 -locker slock
