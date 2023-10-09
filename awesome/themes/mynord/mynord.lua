@@ -22,16 +22,23 @@ theme.bg_urgent     = "#bf616a"
 theme.bg_minimize   = "#444444"
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#abb2bf"
-theme.fg_focus      = "#ffffff"
-theme.fg_urgent     = "#ffffff"
-theme.fg_minimize   = "#ffffff"
+theme.fg_normal     = "#e5e9f0"
+theme.fg_focus      = "#e5e9f0"
+theme.fg_urgent     = "#e5e9f0"
+theme.fg_minimize   = "#e5e9f0"
 
-theme.useless_gap   = dpi(5)
+theme.useless_gap   = dpi(2)
 theme.border_width  = dpi(2)
 theme.border_normal = "#282c34"
 theme.border_focus  = "#b48ead"
 theme.border_marked = "#91231c"
+
+theme.red = "#bf616a"
+theme.green = "#a3be8c"
+theme.yellow = "#ebcb8b"
+theme.blue = "#81a1c1"
+theme.magenta = "#b48ead"
+theme.cyan = "#88c0d0"
 
 -- There are other variable sets
 -- overriding the default one when
@@ -44,7 +51,7 @@ theme.border_marked = "#91231c"
 -- prompt_[fg|bg|fg_cursor|bg_cursor|font]
 -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
 -- Example:
---theme.taglist_bg_focus = "#ff0000"
+-- theme.taglist_bg_focus = "#ff0000"
 
 -- Generate taglist squares:
 local taglist_square_size = dpi(4)
@@ -56,17 +63,33 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 )
 
 -- Variables set for theming notifications:
--- notification_font
--- notification_[bg|fg]
--- notification_[width|height|margin]
--- notification_[border_color|border_width|shape|opacity]
+local naughty = require("naughty")
+local gears = require("gears")
+naughty.config.defaults.icon_size = dpi(100)
+naughty.config.defaults.ontop = true
+naughty.config.defaults.timeout = 10
+naughty.config.defaults.hover_timeout = 300
+naughty.config.defaults.title = 'Notification'
+naughty.config.defaults.margin = dpi(14)
+naughty.config.defaults.border_width = 2
+naughty.config.defaults.border_color = "#a3be8c"
+naughty.config.defaults.opacity = 0.9
+naughty.config.defaults.position = 'top_middle'
+naughty.config.defaults.spacing = '30'
+naughty.config.defaults.shape = function(cr, w, h)
+    gears.shape.rounded_rect(cr, w, h, dpi(6))
+end
+theme.notification_font = "Hack Nerd Font 10"
+theme.notification_bg = "#535d60"
+theme.notification_fg = "#e5e9f0"
 
 -- Variables set for theming the menu:
--- menu_[bg|fg]_[normal|focus]
--- menu_[border_color|border_width]
-theme.menu_submenu_icon = themes_path.."default/submenu.png"
-theme.menu_height = dpi(15)
-theme.menu_width  = dpi(100)
+theme.menu_height = dpi(25)
+theme.menu_width  = dpi(175)
+theme.menu_bg_normal = "#282c34"
+theme.menu_bg_focus =   "#535d6c"
+theme.menu_border_width = 2
+theme.menu_border_color = "#a3be8c"
 
 -- You can add as many variables as
 -- you wish and access them by using
