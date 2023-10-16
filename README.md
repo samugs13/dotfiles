@@ -1,6 +1,6 @@
 # dotfiles
 <ul>
-  <li>Window Manager: qtile</li>
+  <li>Window Manager: qtile / awesome</li>
   <li>Shell: zsh</li>
   <li>Terminal emulator: alacritty / kitty</li>
   <li>IDE: neovim</li>
@@ -28,6 +28,12 @@ This environment uses pywal to match wallpaper colors with qtile and terminal co
   2. Import the script [pywal_colors.py](qtile/settings/scripts/pywal_colors.py) to use wallpaper colors in qtile widgets
 
 The widgets are the ones at `widgets.py`
+
+## Awesomewm environment
+![awesome2](https://github.com/samugs13/dotfiles/assets/78796980/0b2de37f-55b3-4e5f-98a0-7328af15dfab)
+![awesome1](https://github.com/samugs13/dotfiles/assets/78796980/64e94a53-6a85-45d8-98f4-3f8c67063924)
+
+Minimal config, nord themed.
 
 ## Neovim 
 ![nvim](https://user-images.githubusercontent.com/78796980/160302889-f3b0da4f-85fe-469a-85be-ab73e14f7091.png)
