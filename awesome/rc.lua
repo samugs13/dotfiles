@@ -60,12 +60,12 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     -- awful.layout.suit.floating,
-    -- awful.layout.suit.tile,
+    awful.layout.suit.tile,
     -- awful.layout.suit.tile.left,
-    -- awful.layout.suit.tile.bottom,
+    awful.layout.suit.tile.bottom,
     -- awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
+    -- awful.layout.suit.fair,
+    -- awful.layout.suit.fair.horizontal,
     -- awful.layout.suit.spiral,
     -- awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
@@ -348,7 +348,7 @@ globalkeys = gears.table.join(
     awful.key({ modkey,}, "o", function () awful.util.spawn("okular") end, {description = "open pdf viewer", group = "launcher"}),
     awful.key({ modkey,}, "r", function () awful.util.spawn("dmenu_run") end, {description = "launch dmenu", group = "launcher"}),
     awful.key({ modkey,}, "s", function () awful.util.spawn("spotify") end, {description = "open spotify", group = "launcher"}),
-    awful.key({ modkey,}, "w", function () awful.util.spawn("whatsapp-nativefier") end, {description = "open whatsapp", group = "launcher"}),
+    awful.key({ modkey,}, "w", function () awful.util.spawn("brave --new-window https://web.whatsapp.com/") end, {description = "open whatsapp", group = "launcher"}),
     awful.key({ modkey,}, "x", function () awful.util.spawn("slock") end, {description = "lock laptop", group = "launcher"}),
     awful.key({ modkey,}, "z", function () awful.util.spawn("sh /home/s4mb4/Escritorio/scripts/dmenu-powersettings.sh") end, {description = "power settings", group = "launcher"})
 )
@@ -521,4 +521,4 @@ end)
 
 -- Autostart applications
 awful.spawn.with_shell("~/.config/awesome/scripts/autostart.sh")
-awful.spawn.with_shell("picom --config $HOME/.config/awesome/scripts/picom.conf")
+awful.spawn.with_shell("picom --config $HOME/.config/awesome/scripts/picom.conf ")
