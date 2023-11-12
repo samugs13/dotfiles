@@ -16,4 +16,5 @@ blueberry-tray
 run cbatticon -i notification   # Battery systray icon
 run volumeicon
 run flameshot
+run solaar --window=hide
 xautolock -time 10 -locker slock
