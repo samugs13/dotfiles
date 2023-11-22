@@ -6,6 +6,7 @@
 - WM: Awesome (previously Qtile)
 - Terminal emulator: Alacritty
 - Shell: ZSH
+- IDE: Lunarvim
 - Launcher/Scripts: Dmenu
 - Browser: Brave
 
