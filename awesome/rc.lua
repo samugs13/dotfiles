@@ -152,7 +152,15 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "", "", "", "", "", "", "", "" }, s, awful.layout.layouts[1])
+    -- if screen:count() == 1 then
+      awful.tag({ "", "", "", "", "", "", "", "" }, s, awful.layout.layouts[1])
+    -- elseif screen:count() == 2 then
+    --   if s.index==1 then
+    --     awful.tag({ "", "", "", "" }, screen[1], awful.layout.layouts[1])
+    --   elseif s.index==2 then
+    --     awful.tag({ "", "", "", "" }, screen[2], awful.layout.layouts[1])
+    -- end
+
 
     -- Create an imagebox widget which will contain an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
@@ -207,7 +215,7 @@ awful.screen.connect_for_each_screen(function(s)
         right  = 10,
         widget = wibox.container.margin,
     },
-    bg         = "#282c34",
+    bg         = beautiful.black,
     shape      = gears.shape.rounded_rect,
     shape_clip = true,
     shape_border_width = 4,
@@ -274,6 +282,8 @@ awful.screen.connect_for_each_screen(function(s)
     })
 
     -- Add widgets to the wibox
+    -- Bar for primary screen
+  if s == screen.primary then
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
@@ -293,6 +303,25 @@ awful.screen.connect_for_each_screen(function(s)
             separator
         },
     }
+  
+  else 
+    s.mywibox:setup {
+        layout = wibox.layout.align.horizontal,
+        { -- Left widgets
+            layout = wibox.layout.fixed.horizontal,
+            s.mytaglist,
+            separator
+        }, 
+        s.mytasklist, -- Middle widget
+        { -- Right widgets
+            layout = wibox.layout.fixed.horizontal,
+            separator,
+            round_textclock,
+            separator
+        },
+    }
+  end
+
 end)
 -- }}}
 
