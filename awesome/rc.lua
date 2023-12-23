@@ -184,6 +184,19 @@ awful.screen.connect_for_each_screen(function(s)
         },
     }
 
+    s.taglist1 = awful.widget.taglist {
+        screen  = s,
+        filter  = awful.widget.taglist.filter,
+        buttons = taglist_buttons,
+         style   = {
+            shape = gears.shape.circle,
+            fg_occupied = beautiful.cyan,
+            bg_focus = beautiful.cyan,
+            fg_focus = beautiful.bg_normal,
+            fg_empty = beautiful.fg_normal
+        },
+    }
+
     -- Create textclock widget
     local round_textclock = wibox.widget {
     {
@@ -300,7 +313,7 @@ awful.screen.connect_for_each_screen(function(s)
             separator
         },
     }
-  
+  -- Bar for secondary screen 
   else 
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
@@ -348,7 +361,7 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Shift" }, "k", function () awful.client.swap.byidx( -1)    end, {description = "swap with previous client by index", group = "layout"}),
     awful.key({ modkey,}, "j", function () awful.client.focus.byidx( 1) end, {description = "focus next client by index", group = "layout"}),
     awful.key({ modkey,}, "k", function () awful.client.focus.byidx(-1) end, {description = "focus previous client by index", group = "layout"}),
-    awful.key({ modkey,}, "space", function () awful.client.focus.byidx(1) end, {description = "focus next client by index", group = "layout"}),
+    --awful.key({ modkey,}, "space", function () awful.client.focus.byidx(1) end, {description = "focus next client by index", group = "layout"}),
     awful.key({ modkey,}, "l", function () awful.tag.incmwfact( 0.05) end, {description = "increase master width factor", group = "layout"}),
     awful.key({ modkey,}, "h", function () awful.tag.incmwfact(-0.05) end, {description = "decrease master width factor", group = "layout"}),
 
@@ -374,9 +387,47 @@ globalkeys = gears.table.join(
     awful.key({ modkey,}, "s", function () awful.util.spawn("spotify") end, {description = "open spotify", group = "launcher"}),
     awful.key({ modkey,}, "w", function () awful.util.spawn("brave --new-window https://web.whatsapp.com/") end, {description = "open whatsapp", group = "launcher"}),
     awful.key({ modkey,}, "x", function () awful.util.spawn("slock") end, {description = "lock laptop", group = "launcher"}),
-    awful.key({ modkey,}, "z", function () awful.util.spawn("sh /home/s4mb4/Escritorio/scripts/dmenu-powersettings.sh") end, {description = "power settings", group = "launcher"})
+    awful.key({ modkey,}, "z", function () awful.util.spawn("sh /home/s4mb4/Escritorio/scripts/dmenu-powersettings.sh") end, {description = "power settings", group = "launcher"}),
 
+    awful.key({ modkey, }, "space",
+        function ()
+            local tag = awful.screen.focused().selected_tag
+            local target_screen = gears.math.cycle(screen:count(), awful.screen.focused().index + 1)
+            if tag then
+                tag.screen = target_screen
+                tag:view_only()
+                awful.screen.focus(target_screen)
+                local i = 1
+                for t in pairs(root.tags()) do
+                    if (root.tags()[t].screen.index == target_screen) then
+                        screen[target_screen].tags[root.tags()[t].index].index = i
+                        i = i + 1
+                    end
+                end
+            end
+        end,
+        {description = "move tag to next screen", group = "screen"}
+    ),
 
+    awful.key({ modkey, "Shift" }, "space",
+        function ()
+            local tag = awful.screen.focused().selected_tag
+            local target_screen = gears.math.cycle(screen:count(), awful.screen.focused().index - 1)
+            if tag then
+                tag.screen = target_screen
+                tag:view_only()
+                awful.screen.focus(target_screen)
+                local i = 1
+                for t in pairs(root.tags()) do
+                    if (root.tags()[t].screen.index == target_screen) then
+                        screen[target_screen].tags[root.tags()[t].index].index = i
+                        i = i + 1
+                    end
+                end
+            end
+        end,
+        {description = "move tag to previous screen", group = "screen"}
+    )
 )
 
 clientkeys = gears.table.join(
