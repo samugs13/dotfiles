@@ -150,18 +150,15 @@ screen.connect_signal("property::geometry", set_wallpaper)
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
-
-    -- Each screen has its own tag table.
-    -- if screen:count() == 1 then
-      awful.tag({ "", "", "", "", "", "", "", "" }, s, awful.layout.layouts[1])
-    -- elseif screen:count() == 2 then
-    --   if s.index==1 then
-    --     awful.tag({ "", "", "", "" }, screen[1], awful.layout.layouts[1])
-    --   elseif s.index==2 then
-    --     awful.tag({ "", "", "", "" }, screen[2], awful.layout.layouts[1])
-    -- end
-
-
+    
+   -- Each screen has its own tag table.
+    if (s.index == 1) then
+        awful.tag({ "", "", "", "","", "", "", ""}, s, awful.layout.layouts[1])
+    else
+        root.tags()[s.index].screen = s
+        root.tags()[s.index]:view_only()
+    end
+    
     -- Create an imagebox widget which will contain an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox(s)
@@ -315,8 +312,6 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            separator,
-            round_textclock,
             separator
         },
     }
@@ -380,6 +375,8 @@ globalkeys = gears.table.join(
     awful.key({ modkey,}, "w", function () awful.util.spawn("brave --new-window https://web.whatsapp.com/") end, {description = "open whatsapp", group = "launcher"}),
     awful.key({ modkey,}, "x", function () awful.util.spawn("slock") end, {description = "lock laptop", group = "launcher"}),
     awful.key({ modkey,}, "z", function () awful.util.spawn("sh /home/s4mb4/Escritorio/scripts/dmenu-powersettings.sh") end, {description = "power settings", group = "launcher"})
+
+
 )
 
 clientkeys = gears.table.join(
@@ -396,54 +393,101 @@ clientkeys = gears.table.join(
 )
 
 -- Bind all key numbers to tags.
+-- for i = 1, 9 do
+--     globalkeys = gears.table.join(globalkeys,
+
+--         -- View tag only.
+--         awful.key({ modkey }, "#" .. i + 9,
+--                   function (, "9")
+--                         local screen = awful.screen.focused()
+--                         local tag = screen.tags[i]
+--                         if tag then
+--                            tag:view_only()
+--                         end
+--                   end,
+--                   {description = "view tag #"..i, group = "tag"}),
+
+--         -- Toggle tag display.
+--         awful.key({ modkey, "Control" }, "#" .. i + 9,
+--                   function ()
+--                       local screen = awful.screen.focused()
+--                       local tag = screen.tags[i]
+--                       if tag then
+--                          awful.tag.viewtoggle(tag)
+--                       end
+--                   end,
+--                   {description = "toggle tag #" .. i, group = "tag"}),
+
+--         -- Move client to tag.
+--         awful.key({ modkey, "Shift" }, "#" .. i + 9,
+--                   function ()
+--                       if client.focus then
+--                           local tag = client.focus.screen.tags[i]
+--                           if tag then
+--                               client.focus:move_to_tag(tag)
+--                           end
+--                      end
+--                   end,
+--                   {description = "move focused client to tag #"..i, group = "tag"}),
+
+--         -- Toggle tag on focused client.
+--         awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
+--                   function ()
+--                       if client.focus then
+--                           local tag = client.focus.screen.tags[i]
+--                           if tag then
+--                               client.focus:toggle_tag(tag)
+--                           end
+--                       end
+--                   end,
+--                   {description = "toggle focused client on tag #" .. i, group = "tag"})
+--     )
+-- end
+
 for i = 1, 9 do
     globalkeys = gears.table.join(globalkeys,
-
-        -- View tag only.
-        awful.key({ modkey }, "#" .. i + 9,
-                  function ()
-                        local screen = awful.screen.focused()
-                        local tag = screen.tags[i]
-                        if tag then
-                           tag:view_only()
-                        end
-                  end,
-                  {description = "view tag #"..i, group = "tag"}),
-
+    -- View tag only.
+    awful.key({ modkey }, "#" .. i + 9,
+    function ()
+        local tag = root.tags()[i]
+        local screen = tag.screen
+        if tag then
+            tag:view_only()
+            awful.screen.focus(screen)
+        end
+    end,
+    {description = "view tag #"..i, group = "tag"}),
         -- Toggle tag display.
-        awful.key({ modkey, "Control" }, "#" .. i + 9,
-                  function ()
-                      local screen = awful.screen.focused()
-                      local tag = screen.tags[i]
-                      if tag then
-                         awful.tag.viewtoggle(tag)
-                      end
-                  end,
-                  {description = "toggle tag #" .. i, group = "tag"}),
-
-        -- Move client to tag.
-        awful.key({ modkey, "Shift" }, "#" .. i + 9,
-                  function ()
-                      if client.focus then
-                          local tag = client.focus.screen.tags[i]
-                          if tag then
-                              client.focus:move_to_tag(tag)
-                          end
-                     end
-                  end,
-                  {description = "move focused client to tag #"..i, group = "tag"}),
-
+    awful.key({ modkey, "Control" }, "#" .. i + 9,
+    function ()
+        local tag = root.tags()[i]
+        if tag then
+            awful.tag.viewtoggle(tag)
+        end
+    end,
+    {description = "toggle tag #" .. i, group = "tag"}),
+    -- Move client to tag.
+    awful.key({ modkey, "Shift" }, "#" .. i + 9,
+    function ()
+        if client.focus then
+            local tag = root.tags()[i]
+            if tag then
+                client.focus:move_to_tag(tag)
+            end
+        end
+    end,
+    {description = "move focused client to tag #"..i, group = "tag"}),
         -- Toggle tag on focused client.
-        awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
-                  function ()
-                      if client.focus then
-                          local tag = client.focus.screen.tags[i]
-                          if tag then
-                              client.focus:toggle_tag(tag)
-                          end
-                      end
-                  end,
-                  {description = "toggle focused client on tag #" .. i, group = "tag"})
+    awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
+    function ()
+        if client.focus then
+            local tag = root.tags()[i]
+            if tag then
+                client.focus:toggle_tag(tag)
+            end
+        end
+    end,
+    {description = "toggle focused client on tag #" .. i, group = "tag"})
     )
 end
 
