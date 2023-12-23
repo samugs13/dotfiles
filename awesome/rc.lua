@@ -169,6 +169,7 @@ awful.screen.connect_for_each_screen(function(s)
                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
     
     local separator = wibox.widget.textbox(" ")
+    local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
 
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
@@ -182,20 +183,7 @@ awful.screen.connect_for_each_screen(function(s)
             fg_focus = beautiful.bg_normal,
             fg_empty = beautiful.fg_normal
         },
-    }
-
-    s.taglist1 = awful.widget.taglist {
-        screen  = s,
-        filter  = awful.widget.taglist.filter,
-        buttons = taglist_buttons,
-         style   = {
-            shape = gears.shape.circle,
-            fg_occupied = beautiful.cyan,
-            bg_focus = beautiful.cyan,
-            fg_focus = beautiful.bg_normal,
-            fg_empty = beautiful.fg_normal
-        },
-    }
+    } 
 
     -- Create textclock widget
     local round_textclock = wibox.widget {
@@ -292,8 +280,7 @@ awful.screen.connect_for_each_screen(function(s)
     })
 
     -- Add widgets to the wibox
-    -- Bar for primary screen
-  if s == screen.primary then
+  if screen:count() == 1 then
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
@@ -307,27 +294,62 @@ awful.screen.connect_for_each_screen(function(s)
             separator,
             round_systray,
             separator,
+            spotify_widget({
+                font = "Hack Nerd Font",
+                play_icon = '/usr/share/icons/Papirus-Light/24x24/categories/spotify.svg',
+                pause_icon = '/usr/share/icons/Papirus-Dark/24x24/panel/spotify-indicator.svg'
+            }),
+            separator,
             round_textclock,
             separator,
             s.mylayoutbox,
             separator
         },
     }
-  -- Bar for secondary screen 
-  else 
-    s.mywibox:setup {
-        layout = wibox.layout.align.horizontal,
-        { -- Left widgets
-            layout = wibox.layout.fixed.horizontal,
-            s.mytaglist,
-            separator
-        }, 
-        s.mytasklist, -- Middle widget
-        { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-            separator
-        },
-    }
+  elseif screen:count() > 1 then
+      -- Bar for primary screen
+    if s == screen.primary then
+      s.mywibox:setup {
+          layout = wibox.layout.align.horizontal,
+          { -- Left widgets
+              layout = wibox.layout.fixed.horizontal,
+              s.mytaglist,
+              separator
+          }, 
+          s.mytasklist, -- Middle widget
+          { -- Right widgets
+              layout = wibox.layout.fixed.horizontal,
+              separator,
+              round_systray,
+              separator,
+              round_textclock,
+              separator,
+              s.mylayoutbox,
+              separator
+          },
+      }
+    -- Bar for secondary screen 
+    else 
+      s.mywibox:setup {
+          layout = wibox.layout.align.horizontal,
+          { -- Left widgets
+              layout = wibox.layout.fixed.horizontal,
+              s.mytaglist,
+              separator
+          }, 
+          s.mytasklist, -- Middle widget
+          { -- Right widgets
+              layout = wibox.layout.fixed.horizontal,
+              separator,
+              spotify_widget({
+                font = "Hack Nerd Font",
+                play_icon = '/usr/share/icons/Papirus-Light/24x24/categories/spotify.svg',
+                pause_icon = '/usr/share/icons/Papirus-Dark/24x24/panel/spotify-indicator.svg'
+              }),
+              separator
+          },
+      }
+    end
   end
 
 end)
